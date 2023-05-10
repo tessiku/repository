@@ -28,3 +28,4 @@ class news_model {
         'https://i-invdn-com.investing.com/news/LYNXNPEC602U7_L.jpg')
   ];
 }
+    //what is this code 

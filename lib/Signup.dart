@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'Pages1/HomePage.dart';
+import 'login/HomePageLogin.dart';
 //import 'package:ins_app/animation/Animation1.dart';
-import 'package:ins_app/homepage.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -30,11 +32,11 @@ class _SignUpState extends State<SignUp> {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              image: DecorationImage(
+                /* image: DecorationImage(
                 image: AssetImage('assets/background.jpg'),
                 fit: BoxFit.cover,
-              ),
-            ),
+              ),*/
+                ),
           ),
           SafeArea(
             child: Container(
@@ -129,7 +131,7 @@ class _SignUpState extends State<SignUp> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => HomePageLogin(),
         ),
       );
     } on FirebaseAuthException catch (e) {

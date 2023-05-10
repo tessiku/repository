@@ -4,7 +4,6 @@ import 'package:ins_app/AuthPage.dart';
 import 'package:ins_app/add_data.dart';
 import 'package:ins_app/data_view.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
-import 'homepage.dart';
 import 'create_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;

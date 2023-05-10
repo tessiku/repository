@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/AccountPage.dart';
+import 'package:ins_app/Pages1/HomePage.dart';
 import 'package:ins_app/Pages1/SettingsPage.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
+import 'package:ins_app/greeding/GreedingPage.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
 import 'package:http/http.dart' as http;
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, this.title}) : super(key: key);
+class HomePageLogin extends StatefulWidget {
+  const HomePageLogin({Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageLogin> createState() => _HomePageLoginState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageLoginState extends State<HomePageLogin> {
   List<Article> articles = [];
 
   @override
@@ -35,7 +37,8 @@ class _HomePageState extends State<HomePage> {
   //create a default image in case of error
   Widget _buildDefaultImage() {
     return Image.asset(
-      'assets/images/default.png',
+      'assets/images/default.png',  
+
       fit: BoxFit.cover,
     );
   }
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: const Text("what's new in tunisa"),
       ),
-      /*drawer: Drawer(
+      drawer: Drawer(
         child: Container(
           color: Color.fromARGB(255, 203, 207, 227),
           child: ListView(
@@ -80,7 +83,8 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomePage(title: 'Home Page')),
+                        builder: (context) =>
+                            HomePageLogin(title: 'Home Page')),
                   );
                 },
               ),
@@ -104,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              ListTile(
+              /*ListTile(
                 leading: Icon(Icons.work_history),
                 title: Text('Work History'),
                 onTap: () {
@@ -113,21 +117,21 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => AccountPage()),
                   );
                 },
-              ),
+              ),*/
               ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('logo out'),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AccountPage()),
+                    MaterialPageRoute(builder: (context) => GreedingPage()),
                   );
                 },
               ),
             ],
           ),
         ),
-      ),*/
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

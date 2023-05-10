@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ins_app/homepage.dart';
+import 'package:ins_app/Pages1/HomePage.dart';
 import 'package:ins_app/Signup.dart';
-
 
 class AuthenticationPage extends StatefulWidget {
   @override
@@ -54,16 +53,15 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SignUp(),
-      ),
-    );
-  },
-  child: Text('SIGN UP'),
-),
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignUp(),
+                    ),
+                  );
+                },
+                child: Text('SIGN UP'),
+              ),
             ],
           ),
         ),
@@ -85,9 +83,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => HomePage()
-        ),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     } on FirebaseAuthException catch (e) {
       setState(() {

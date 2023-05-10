@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/Signup.dart';
+import 'package:ins_app/login/HomePageLogin.dart';
 
 import '../Pages1/AccountPage.dart';
 import '../Pages1/HomePage.dart';
@@ -15,22 +16,18 @@ void main() {
     ),
   );
 }
-
+  
 class GreedingPage extends StatefulWidget {
   @override
   GreedingPageState createState() => GreedingPageState();
-}
+} 
 
 class GreedingPageState extends State<GreedingPage> {
   var currentIndex = 0;
   final List<Widget> listOfPages = [
-    HomePage(
-      title: 'News Page',
-    ),
+    HomePage(title: 'News Page'),
     StatsPage(),
     SettingsPage(),
-
-    //AccountPage(),
     SignUp(),
   ];
   @override
