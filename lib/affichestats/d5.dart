@@ -18,43 +18,32 @@ class _d3State extends State<d5> {
         body: Center(
             child: Container(
                 child: SfCartesianChart(
+          tooltipBehavior: TooltipBehavior(enable: true),
           primaryXAxis: CategoryAxis(),
           primaryYAxis: NumericAxis(
             minimum: 0,
-            maximum: 15000,
-            interval: 3000,
+            maximum: 10000,
+            interval: 1000,
           ),
           palette: <Color>[Colors.teal, Colors.orange, Colors.brown],
           series: <CartesianSeries>[
             ColumnSeries<ChartData, String>(
+              name: '2010',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y,
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
             ColumnSeries<ChartData, String>(
+              name: '2015',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y1,
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
             ColumnSeries<ChartData, String>(
+              name: '2021',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y2,
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
           ],
         ))));

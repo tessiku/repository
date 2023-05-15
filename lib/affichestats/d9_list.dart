@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'd8_list_ch.dart';
+import 'd9_list_ch.dart';
 
-class d8_list extends StatefulWidget {
+class d9_list extends StatefulWidget {
   @override
   _StatsPageState createState() => _StatsPageState();
 }
 
-class _StatsPageState extends State<d8_list> {
+class _StatsPageState extends State<d9_list> {
   TextEditingController _searchController = TextEditingController();
   List<String> _statsList = [
     'Grande Tunisie',
@@ -57,49 +57,49 @@ class _StatsPageState extends State<d8_list> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'grand tunis')),
+            builder: (context) => d9_list_ch(statsItem: 'grand tunis')),
       );
     } else if (statsItem == 'Nord-Est') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'nord est')),
+            builder: (context) => d9_list_ch(statsItem: 'nord est')),
       );
     } else if (statsItem == 'Nord-ouest') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'nord ouest')),
+            builder: (context) => d9_list_ch(statsItem: 'nord ouest')),
       );
     } else if (statsItem == 'Centre-Est') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'centre est')),
+            builder: (context) => d9_list_ch(statsItem: 'centre est')),
       );
     } else if (statsItem == 'Centre-ouest') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'centre ouest')),
+            builder: (context) => d9_list_ch(statsItem: 'centre ouest')),
       );
     } else if (statsItem == 'Sud-Est') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'sud est')),
+            builder: (context) => d9_list_ch(statsItem: 'sud est')),
       );
     } else if (statsItem == 'Sud-Ouest') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: 'sud ouest')),
+            builder: (context) => d9_list_ch(statsItem: 'sud ouest')),
       );
     } else if (statsItem == 'Niveau national') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d8_list_ch(statsItem: '  Niveau national')),
+            builder: (context) => d9_list_ch(statsItem: '  Niveau national')),
       );
     }
   }

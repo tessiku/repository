@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ins_app/affichestats/d8_list.dart';
 
 import '../affichestats/d2.dart';
 import '../affichestats/d3.dart';
-import '../affichestats/d4_depandance.dart';
+import '../affichestats/d1_depandance.dart';
 import '../affichestats/d5.dart';
 import '../affichestats/d7.dart';
-import '../affichestats/d8_list.dart';
+import '../affichestats/d9_list.dart';
 
 class StatsPage extends StatelessWidget {
   final List<String> stats = [
@@ -60,10 +61,15 @@ class StatsPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => d7()),
                 );
-              } else if (index == 8) {
+              } else if (index == 7) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => d8_list()),
+                );
+              } else if (index == 8) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => d9_list()),
                 );
               }
             },

@@ -19,6 +19,7 @@ class _d2State extends State<d2> {
         body: Center(
             child: Container(
                 child: SfCartesianChart(
+          tooltipBehavior: TooltipBehavior(enable: true),
           primaryXAxis: CategoryAxis(),
           primaryYAxis: NumericAxis(
             minimum: 0,
@@ -28,37 +29,25 @@ class _d2State extends State<d2> {
           palette: <Color>[Colors.teal, Colors.orange, Colors.brown],
           series: <CartesianSeries>[
             ColumnSeries<ChartData, String>(
+              name: '2010',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y,
               dataLabelMapper: (ChartData data, _) => data.y.toString(),
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
             ColumnSeries<ChartData, String>(
+              name: '2015',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y1,
               dataLabelMapper: (ChartData data, _) => data.y1.toString(),
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
             ColumnSeries<ChartData, String>(
+              name: '2021',
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.x,
               yValueMapper: (ChartData data, _) => data.y2,
               dataLabelMapper: (ChartData data, _) => data.y2.toString(),
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(fontSize: 12),
-                labelAlignment: ChartDataLabelAlignment.top,
-              ),
             ),
           ],
         ))));
@@ -71,7 +60,7 @@ List<ChartData> chartData = <ChartData>[
   ChartData('N-O', 1754, 2696, 4493),
   ChartData('C-E', 3081, 4309, 6130),
   ChartData(
-    's-E',
+    'S-E',
     2464,
     3250,
     4675,
@@ -85,7 +74,4 @@ class ChartData {
   final double? y;
   final double? y1;
   final double? y2;
-  /*final double? y3;
-  final double? y4;
-  final double? y5;*/
 }

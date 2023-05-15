@@ -19,15 +19,15 @@ class _d7State extends State<d7> {
     final String y2 = '2015';
     final String y3 = '2021';
     final List<ChartData> chartData = <ChartData>[
-      ChartData(x: x + y1, yValue1: 2.1),
-      ChartData(x: y + y1, yValue1: 13.6),
-      ChartData(x: z + y1, yValue1: 6),
-      ChartData(x: x + y2, yValue1: 1.2),
-      ChartData(x: y + y2, yValue1: 6.6),
-      ChartData(x: z + y2, yValue1: 2.9),
-      ChartData(x: x + y3, yValue1: 1.7),
-      ChartData(x: y + y3, yValue1: 5.3),
-      ChartData(x: z + y3, yValue1: 2.9),
+      ChartData(x: x + ' ' + y1, yValue1: 2.1),
+      ChartData(x: y + ' ' + y1, yValue1: 13.6),
+      ChartData(x: z + ' ' + y1, yValue1: 6),
+      ChartData(x: x + ' ' + y2, yValue1: 1.2),
+      ChartData(x: y + ' ' + y2, yValue1: 6.6),
+      ChartData(x: z + ' ' + y2, yValue1: 2.9),
+      ChartData(x: x + ' ' + y3, yValue1: 1.7),
+      ChartData(x: y + ' ' + y3, yValue1: 5.3),
+      ChartData(x: z + ' ' + y3, yValue1: 2.9),
     ];
 
     return Scaffold(
@@ -41,11 +41,13 @@ class _d7State extends State<d7> {
               color: Colors.white,
               child: Center(
                 child: SfCartesianChart(
-                  primaryXAxis: CategoryAxis(),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  primaryXAxis: CategoryAxis(
+                      labelStyle: const TextStyle(color: Colors.transparent)),
                   axes: <ChartAxis>[
                     NumericAxis(
                       numberFormat: NumberFormat.percentPattern(),
-                      majorGridLines: const MajorGridLines(width: 0),
+                      majorGridLines: const MajorGridLines(width: 1),
                       opposedPosition: true,
                       name: 'yAxis1',
                       interval: 1,
@@ -55,14 +57,15 @@ class _d7State extends State<d7> {
                   ],
                   series: <ChartSeries<ChartData, String>>[
                     ColumnSeries<ChartData, String>(
+                      xAxisName: 'xAxis1',
                       animationDuration: 2000,
                       dataSource: chartData,
-                      xValueMapper: (ChartData data, _) => data.x,
-                      yValueMapper: (ChartData data, _) => data.yValue1,
+                      xValueMapper: (ChartData data, _) => data.x!,
+                      yValueMapper: (ChartData data, _) => data.yValue1!,
                       dataLabelSettings: DataLabelSettings(isVisible: true),
 
                       // markerSettings: MarkerSettings(isVisible: true),
-                      name: 'Unit Sold',
+                      name: ' taux de Pauvreté',
                     ),
                     LineSeries<ChartData, String>(
                       animationDuration: 4500,
@@ -70,9 +73,6 @@ class _d7State extends State<d7> {
                       dataSource: chartData,
                       xValueMapper: (ChartData data, _) => data.x,
                       yValueMapper: (ChartData data, _) => data.yValue2,
-                      yAxisName: 'yAxis1',
-                      markerSettings: MarkerSettings(isVisible: true),
-                      name: 'Total Transaction',
                     ),
                   ],
                 ),

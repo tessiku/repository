@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ins_app/Pages1/AccountPage.dart';
-import 'package:ins_app/Pages1/SettingsPage.dart';
-import 'package:ins_app/Pages1/StatsPage.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
 import 'package:http/http.dart' as http;
+import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.title}) : super(key: key);
@@ -214,6 +212,23 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          try {
+            dynamic conversationObject = {
+              'appId':
+                  '25aefadf29154e9cf2f13546d53acbb12' // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
+            };
+            dynamic result = await KommunicateFlutterPlugin.buildConversation(
+                conversationObject);
+            print("Conversation builder success : " + result.toString());
+          } on Exception catch (e) {
+            print("Conversation builder error occurred : " + e.toString());
+          }
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }
