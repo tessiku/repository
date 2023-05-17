@@ -22,7 +22,21 @@ class ArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(article.title),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Text(
+          article.title,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -67,7 +81,7 @@ class ArticlePage extends StatelessWidget {
                   onPressed: () => launchArticleUrl(context),
                   child: const Text('Explore Now!'),
                   style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 104, 97, 97),
+                      primary: const Color.fromARGB(255, 94, 6, 247),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 20),
                       shape: const RoundedRectangleBorder(

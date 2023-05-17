@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ins_app/affichestats/d1_4.dart';
-import 'd1_1.dart';
-import 'd1_2.dart';
-import 'd1_3.dart';
-import 'd1_5.dart';
-import 'd1_6.dart';
+import 'package:ins_app/affichestats/d1_tab1.dart';
 
-class d4_depandance extends StatelessWidget {
-  final List<String> stats = [
+import 'd1_tab2.dart';
+
+class d4_depandance extends StatefulWidget {
+  @override
+  State<d4_depandance> createState() => _d4_depandanceState();
+}
+
+class _d4_depandanceState extends State<d4_depandance> {
+  TextEditingController _searchController = TextEditingController();
+  List<String> _statsList = [
     'stats for  2010 moyennes pour la famille ',
     'stats for 2015 moyennes pour la famille',
     'stats for 2021 moyennes pour la famille',
@@ -15,56 +18,121 @@ class d4_depandance extends StatelessWidget {
     'stats for 2015 moyennes pour le personnel',
     'stats for 2021 moyennes pour le personnel',
   ];
+  List<String> _filteredStatsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+    _filteredStatsList = _statsList;
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    String searchTerm = _searchController.text;
+    List<String> filteredList = [];
+
+    if (searchTerm.isEmpty) {
+      filteredList = _statsList;
+    } else {
+      _statsList.forEach((item) {
+        if (item.toLowerCase().contains(searchTerm.toLowerCase())) {
+          filteredList.add(item);
+        }
+      });
+    }
+
+    setState(() {
+      _filteredStatsList = filteredList;
+    });
+  }
+
+  void _navigateToStatsPage(BuildContext context, String statsItem) {
+    if (statsItem == 'stats for  2010 moyennes pour la famille ') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2010)),
+      );
+    } else if (statsItem == 'stats for 2015 moyennes pour la famille') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2015)),
+      );
+    } else if (statsItem == 'stats for 2021 moyennes pour la famille') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2021)),
+      );
+    } else if (statsItem == 'stats for 2010 moyennes pour le personnel') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2010)),
+      );
+    } else if (statsItem == 'stats for 2015 moyennes pour le personnel') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2015)),
+      );
+    } else if (statsItem == 'stats for 2021 moyennes pour le personnel') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2021)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('les dépenses annuelles moyennes pour la famille'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+            width: 200,
+            child: Transform.scale(
+                scale: 1,
+                child: Text(
+                  'DEPENSES ANUELLES ',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ))),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('List of stats:'),
-          SizedBox(height: 16),
-          for (int i = 0; i < stats.length; i++)
-            ListTile(
-              leading: Icon(Icons.query_stats_outlined),
-              title: Text(stats[i]),
-              onTap: () {
-                if (i == 0) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_1()),
-                  );
-                } else if (i == 1) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_2()),
-                  );
-                } else if (i == 2) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_3()),
-                  );
-                } else if (i == 3) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_4()),
-                  );
-                } else if (i == 4) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_5()),
-                  );
-                } else if (i == 5) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => d1_6()),
-                  );
-                }
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search...',
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _filteredStatsList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    _navigateToStatsPage(context, _filteredStatsList[index]);
+                  },
+                  child: ListTile(
+                    title: Text(_filteredStatsList[index]),
+                  ),
+                );
               },
             ),
+          ),
         ],
       ),
     );

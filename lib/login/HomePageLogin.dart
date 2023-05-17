@@ -37,8 +37,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
   //create a default image in case of error
   Widget _buildDefaultImage() {
     return Image.asset(
-      'assets/images/default.png',  
-
+      'assets/images/default.png',
       fit: BoxFit.cover,
     );
   }
@@ -54,8 +53,19 @@ class _HomePageLoginState extends State<HomePageLogin> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
         centerTitle: true,
-        title: const Text("what's new in tunisa"),
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.newspaper)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       drawer: Drawer(
         child: Container(
@@ -63,10 +73,10 @@ class _HomePageLoginState extends State<HomePageLogin> {
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('accountName'),
-                accountEmail: Text('accountEmail'),
+                accountName: Text('Worker1'),
+                accountEmail: Text('Worker1@gmail.com'),
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
                   backgroundImage: AssetImage('assets/avatar_male.png'),
                 ),
                 decoration: BoxDecoration(
@@ -108,23 +118,14 @@ class _HomePageLoginState extends State<HomePageLogin> {
                   );
                 },
               ),
-              /*ListTile(
-                leading: Icon(Icons.work_history),
-                title: Text('Work History'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AccountPage()),
-                  );
-                },
-              ),*/
               ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('logo out'),
+                title: Text('Log out'),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => GreedingPage()),
+                    (route) => false,
                   );
                 },
               ),

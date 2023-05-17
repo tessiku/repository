@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ins_app/AuthPage.dart';
+import 'package:ins_app/Pages1/SplashScreen.dart';
 import 'package:ins_app/add_data.dart';
 import 'package:ins_app/data_view.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
@@ -8,7 +8,8 @@ import 'package:ins_app/services/GetData.dart';
 import 'create_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,19 +23,6 @@ Future Initialization(BuildContext? context) async {
   await Future.delayed(Duration(seconds: 3));
 }
 
-//List<String> DocIds = [];
-
-//get doc id
-/*Future getDocId() async {
-  await FirebaseFirestore.instance
-      .collection('TAB1')
-      .get()
-      .then((snapshot) => snapshot.docs.forEach((Document) {
-            print(Document.reference);
-            DocIds.add(Document.reference.id);
-          }));
-}*/
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -43,7 +31,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GreedingPage(),
+      home: MyCustomSplashScreen(),
+      // GreedingPage(),
     );
   }
 }

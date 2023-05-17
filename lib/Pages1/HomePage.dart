@@ -37,102 +37,32 @@ class _HomePageState extends State<HomePage> {
       fit: BoxFit.cover,
     );
   }
-  /*void _navigateToDetails(Article article) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NewsDetailsPage(article: article)),
-    );
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
         centerTitle: true,
-        title: const Text("what's new in tunisa"),
-      ),
-      /*drawer: Drawer(
-        child: Container(
-          color: Color.fromARGB(255, 203, 207, 227),
-          child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                accountName: Text('accountName'),
-                accountEmail: Text('accountEmail'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('assets/avatar_male.png'),
-                ),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/stats1.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(title: 'Home Page')),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.query_stats_outlined),
-                title: Text('Stats'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => StatsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('To do list'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.work_history),
-                title: Text('Work History'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AccountPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('logo out'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AccountPage()),
-                  );
-                },
-              ),
-            ],
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.newspaper)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
           ),
         ),
-      ),*/
+      ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.all(16),
             child: const Text(
-              'News',
+              'Suggested Articles',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
@@ -214,22 +144,27 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          try {
-            dynamic conversationObject = {
-              'appId':
-                  '25aefadf29154e9cf2f13546d53acbb12' // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
-            };
-            dynamic result = await KommunicateFlutterPlugin.buildConversation(
-                conversationObject);
-            print("Conversation builder success : " + result.toString());
-          } on Exception catch (e) {
-            print("Conversation builder error occurred : " + e.toString());
-          }
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+          onPressed: () async {
+            try {
+              dynamic conversationObject = {
+                'appId':
+                    '25aefadf29154e9cf2f13546d53acbb12' // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
+              };
+              dynamic result = await KommunicateFlutterPlugin.buildConversation(
+                  conversationObject);
+              print("Conversation builder success : " + result.toString());
+            } on Exception catch (e) {
+              print("Conversation builder error occurred : " + e.toString());
+            }
+          },
+          backgroundColor: Color.fromARGB(
+              195, 0, 138, 251), // Set the desired background color
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: const Icon(
+            Icons.smart_toy,
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
     );
   }
 }
