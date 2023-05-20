@@ -1,34 +1,31 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:ins_app/Pages1/AccountPage.dart';
-import 'package:ins_app/Pages1/HomePage.dart';
 import 'package:ins_app/Pages1/SettingsPage.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
+import 'package:ins_app/Signup.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
-import 'package:ins_app/services/Cin_Collector.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
-import 'package:http/http.dart' as http;
-
+import 'Admin/UserCollectorA.dart';
 import 'Work/Add.dart';
 import 'Work/CheckPage.dart';
 import 'Work/DeletePage.dart';
 import 'Work/NotificationPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 
-class HomePageLogin extends StatefulWidget {
-  const HomePageLogin(
+class HomePageLoginA extends StatefulWidget {
+  const HomePageLoginA(
       {Key? key, this.title, required this.userEmail, required this.name})
       : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
   @override
-  State<HomePageLogin> createState() => _HomePageLoginState();
+  State<HomePageLoginA> createState() => _HomePageLoginState();
 }
 
-class _HomePageLoginState extends State<HomePageLogin> {
+class _HomePageLoginState extends State<HomePageLoginA> {
   List<Article> articles = [];
 
   @override
@@ -98,7 +95,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomePageLogin(
+                        builder: (context) => HomePageLoginA(
                               title: 'Home Page',
                               userEmail: widget.userEmail,
                               name: widget.name,
@@ -113,16 +110,6 @@ class _HomePageLoginState extends State<HomePageLogin> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => StatsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.calendar_view_day),
-                title: Text('To do list'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CalandarPage()),
                   );
                 },
               ),
@@ -282,8 +269,8 @@ class MyCustomWidget extends StatelessWidget {
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.calendar_view_day,
-                color: Color.fromARGB(255, 255, 255, 255)),
+            child: Icon(Icons.delete_forever,
+                color: Color.fromARGB(255, 251, 0, 0)),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -312,13 +299,13 @@ class MyCustomWidget extends StatelessWidget {
 
     switch (pageTitle) {
       case " 1":
-        page = AddPerson('');
+        page = SignUp();
         break;
       case " 2":
-        page = Cin_Collector();
+        page = UserCollector();
         break;
       case " 3":
-        page = CalandarPage();
+        page = DeletePage();
         break;
       case " 4":
         page = NotificationPage();

@@ -4,12 +4,12 @@ import 'package:ins_app/model/AddEvent.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/painting.dart';
 
-class SettingsPage extends StatefulWidget {
+class CalandarPage extends StatefulWidget {
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _CalandarPageState createState() => _CalandarPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _CalandarPageState extends State<CalandarPage> {
   List<Appointment> _appointments = [];
   List<Appointment> _selectedAppointments = [];
   CalendarController _calendarController = CalendarController();

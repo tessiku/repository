@@ -28,7 +28,7 @@ class GreedingPageState extends State<GreedingPage> {
   final List<Widget> listOfPages = [
     HomePage(title: ''),
     StatsPage(),
-    SettingsPage(),
+    CalandarPage(),
     LoginPage()
   ];
   @override

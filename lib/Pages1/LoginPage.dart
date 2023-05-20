@@ -5,6 +5,7 @@ import 'package:ins_app/Pages1/AccountPage.dart';
 import 'package:ins_app/Pages1/HomePage.dart';
 import 'package:ins_app/Signup.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
+import 'package:ins_app/login/HomePageLoginA.dart';
 import '../ani/BgAnimation.dart';
 import 'PwdR.dart';
 
@@ -46,20 +47,27 @@ class _LoginPageState extends State<LoginPage> {
           String email = userSnapshot['email'];
           //String password = userSnapshot['password'];
           String role = userSnapshot['Role'];
+          String name = userSnapshot['Name'];
 
           // Update login date in Firestore
           if (role == 'Emp') {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (BuildContext context) => HomePageLogin(),
+                builder: (BuildContext context) => HomePageLogin(
+                  userEmail: email,
+                  name: name,
+                ),
               ),
             );
-          } else if (role == 'Adm') ///// admin login
+          } else if (role == 'Admin') ///// admin login
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (BuildContext context) => AccountPage(),
+                builder: (BuildContext context) => HomePageLoginA(
+                  userEmail: email,
+                  name: name,
+                ),
               ),
             );
         } else {
@@ -115,206 +123,207 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
 
         //backgroundColor: Color.fromARGB(255, 94, 6, 247),
-        backgroundColor: Color.fromARGB(175, 122, 3, 3),
+        //backgroundColor: Color.fromARGB(206, 9, 30, 224),
+
         body: Stack(
-          children: [
-            //CircularParticleScreen2(),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            height: 120,
-                            width: 120,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset("assets/insSplash.jpg",
-                                fit: BoxFit.cover),
+      children: [
+        CircularParticleScreen2(),
+        Align(
+          alignment: Alignment.center,
+          child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset("assets/insSplash.jpg",
+                            fit: BoxFit.cover),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Login Now ",
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 24,
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Sign In",
-                              textAlign: TextAlign.start,
-                              overflow: TextOverflow.clip,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 24,
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+                        child: TextFormField(
+                          controller: _emailController,
+                          obscureText: false,
+                          textAlign: TextAlign.start,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 0),
-                            child: TextFormField(
-                              controller: _emailController,
-                              obscureText: false,
-                              textAlign: TextAlign.start,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 16,
-                                color: Color(0xff000000),
-                              ),
-                              decoration: InputDecoration(
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      width: 1),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      width: 1),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      width: 1),
-                                ),
-                                labelText: "Email",
-                                labelStyle: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                          decoration: InputDecoration(
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              borderSide: BorderSide(
                                   color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                                filled: true,
-                                fillColor: Color.fromARGB(0, 255, 255, 255),
-                                isDense: false,
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 12),
-                              ),
-                              validator: _validateEmail,
+                                  width: 1),
                             ),
-                          ),
-                          TextFormField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            style: TextStyle(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  width: 1),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  width: 1),
+                            ),
+                            labelText: "Email",
+                            labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                               fontSize: 16,
-                              color: Color(0xff000000),
+                              color: Color.fromARGB(255, 255, 255, 255),
                             ),
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                    color: Color(0xff9e9e9e), width: 1),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                    color: Color(0xff9e9e9e), width: 1),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    width: 1),
-                              ),
-                              labelText: "Mot de passe",
-                              labelStyle: TextStyle(
+                            filled: true,
+                            fillColor: Color.fromARGB(0, 255, 255, 255),
+                            isDense: false,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                          ),
+                          validator: _validateEmail,
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                        decoration: InputDecoration(
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                            borderSide:
+                                BorderSide(color: Color(0xff9e9e9e), width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                            borderSide:
+                                BorderSide(color: Color(0xff9e9e9e), width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                width: 1),
+                          ),
+                          labelText: "Mot de passe",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                          filled: true,
+                          fillColor: Color.fromARGB(0, 255, 255, 255),
+                          isDense: false,
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        ),
+                        validator: _validatePassword,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            child: Text(
+                              "Forgot Password ?",
+                              textAlign: TextAlign.start,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Color.fromARGB(255, 255, 255, 255),
                               ),
-                              filled: true,
-                              fillColor: Color.fromARGB(0, 255, 255, 255),
-                              isDense: false,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 12),
                             ),
-                            validator: _validatePassword,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PasswordReset()),
+                              );
+                            },
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                child: Text(
-                                  "Forgot Password ?",
-                                  textAlign: TextAlign.start,
-                                  overflow: TextOverflow.clip,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 14,
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                  ),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PasswordReset()),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 30, 0, 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                MaterialButton(
-                                  onPressed: () {
-                                    _authenticate();
-                                  },
-                                  color: Color.fromARGB(183, 1, 208, 254),
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  padding: EdgeInsets.all(16),
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  textColor: Color.fromRGBO(255, 255, 255, 1),
-                                  height: 40,
-                                  minWidth: 140,
-                                ),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  )),
-            ),
-          ],
-        ));
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 30, 0, 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            MaterialButton(
+                              onPressed: () {
+                                _authenticate();
+                              },
+                              color: Color.fromARGB(183, 1, 208, 254),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              padding: EdgeInsets.all(16),
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                ),
+                              ),
+                              textColor: Color.fromRGBO(255, 255, 255, 1),
+                              height: 40,
+                              minWidth: 140,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+        ),
+      ],
+    ));
   }
 }
