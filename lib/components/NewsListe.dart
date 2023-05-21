@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/news_model.dart';
 
 class NewsListe extends StatefulWidget {
   NewsListe(this.data, {Key? key}) : super(key: key);
-  news_model data;
+  final data;
 
   @override
   State<NewsListe> createState() => _NewsListeState();

@@ -18,6 +18,7 @@ class NewsApi {
         ListArt listArt = ListArt.fromJson(jsonData);
         return listArt.lists;
       } else {
+        // 401 serveur .... 404 page not found
         print('statuscode =${response.statusCode}');
         return [];
       }

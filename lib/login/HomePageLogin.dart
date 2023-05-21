@@ -2,7 +2,7 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/AccountPage.dart';
 import 'package:ins_app/Pages1/HomePage.dart';
-import 'package:ins_app/Pages1/SettingsPage.dart';
+import 'package:ins_app/Pages1/CalandarPage.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import 'Work/Add.dart';
 import 'Work/CheckPage.dart';
 import 'Work/DeletePage.dart';
-import 'Work/NotificationPage.dart';
+import 'Work/EventListPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 
 class HomePageLogin extends StatefulWidget {
@@ -321,7 +321,7 @@ class MyCustomWidget extends StatelessWidget {
         page = CalandarPage();
         break;
       case " 4":
-        page = NotificationPage();
+        page = EventListPage();
         break;
       default:
         page = Container(); // Provide a fallback page or handle error case

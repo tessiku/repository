@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddEvent extends StatefulWidget {
   final DateTime selectedDate;
@@ -29,13 +30,10 @@ class _AddEventState extends State<AddEvent> {
         backgroundColor: Color.fromARGB(255, 94, 6, 247),
         toolbarHeight: 80,
         centerTitle: true,
-        title: Text(
-          "Add Event",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: Container(
+            width: 100,
+            height: 100,
+            child: Transform.scale(scale: 1.5, child: Icon(Icons.event))),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -102,20 +100,43 @@ class _AddEventState extends State<AddEvent> {
               ),
             ),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    final newAppointment = Appointment(
-                      startTime: _selectedDateTime,
-                      endTime: _selectedDateTime.add(Duration(hours: 1)),
-                      subject: _eventName,
-                      color: Colors.blue,
-                    );
-                    Navigator.pop(context, newAppointment);
-                  }
-                },
-                child: Text('Save'),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: 50,
+
+                // Adjust the percentage as needed
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      final newAppointment = Appointment(
+                        startTime: _selectedDateTime,
+                        endTime: _selectedDateTime.add(Duration(hours: 1)),
+                        subject: _eventName,
+                      );
+
+                      // Save the event to Firebase Firestore
+                      FirebaseFirestore.instance.collection('events').add({
+                        'startTime': newAppointment.startTime,
+                        'endTime': newAppointment.endTime,
+                        'subject': newAppointment.subject,
+                      }).then((value) {
+                        Navigator.pop(context, newAppointment);
+                      }).catchError((error) {
+                        // Handle error saving to Firestore
+                        print('Failed to save event: $error');
+                        // Show an error dialog or display a snackbar to inform the user
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    primary: Color.fromARGB(255, 94, 6, 247),
+                  ),
+                  child: Text('Save'),
+                ),
               ),
             ),
           ],

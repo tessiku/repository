@@ -7,7 +7,7 @@ import 'package:ins_app/login/HomePageLogin.dart';
 
 import '../Pages1/AccountPage.dart';
 import '../Pages1/HomePage.dart';
-import '../Pages1/SettingsPage.dart';
+import '../Pages1/CalandarPage.dart';
 
 void main() {
   runApp(
