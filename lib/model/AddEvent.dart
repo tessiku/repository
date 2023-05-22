@@ -51,57 +51,62 @@ class _AddEventState extends State<AddEvent> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
-          FormBuilder(
-              child: Column(
-            children: [
-              FormBuilderTextField(
-                controller: _titel,
-                name: "titre",
-                decoration: InputDecoration(
-                  hintText: 'ajouter un titre pour votre evenement',
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.only(left: 48.0),
-                ),
-              ),
-              Divider(),
-              FormBuilderTextField(
-                controller: _description,
-                name: "description",
-                maxLines: 5,
-                minLines: 1,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'ajouter une description pour votre evenement',
-                  prefixIcon: Icon(Icons.description),
-                ),
-              ),
-              Divider(),
-              FormBuilderDateTimePicker(
-                controller: _date,
-                name: "date",
-                initialValue: widget.selectedDate,
-                fieldHintText: "ajouter un date",
-                inputType: InputType.date,
-                format: DateFormat("EEEE, MMMM d, yyyy"),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  prefixIcon: Icon(Icons.calendar_today_sharp),
-                ),
-              ),
-              Divider(),
-              ElevatedButton(
-                  onPressed: () async {
-                    AddEv();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DeletePage()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 94, 6, 247),
-                    minimumSize: Size(150, 50),
+          Form(
+            key: _formKey,
+            child: FormBuilder(
+                child: Column(
+              children: [
+                FormBuilderTextField(
+                  controller: _titel,
+                  name: "titre",
+                  decoration: InputDecoration(
+                    hintText: 'ajouter un titre pour votre evenement',
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.only(left: 48.0),
                   ),
-                  child: Text('ajouter')),
-            ],
-          ))
+                ),
+                Divider(),
+                FormBuilderTextField(
+                  controller: _description,
+                  name: "description",
+                  maxLines: 5,
+                  minLines: 1,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'ajouter une description pour votre evenement',
+                    prefixIcon: Icon(Icons.description),
+                  ),
+                ),
+                Divider(),
+                FormBuilderDateTimePicker(
+                  controller: _date,
+                  name: "date",
+                  initialValue: widget.selectedDate,
+                  fieldHintText: "ajouter un date",
+                  inputType: InputType.date,
+                  format: DateFormat("EEEE, MMMM d, yyyy"),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.calendar_today_sharp),
+                  ),
+                ),
+                Divider(),
+                ElevatedButton(
+                    onPressed: () async {
+                      AddEv();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DeletePage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 94, 6, 247),
+                      minimumSize: Size(150, 50),
+                    ),
+                    child: Text('ajouter')),
+              ],
+            )),
+          )
         ],
       ),
     );
