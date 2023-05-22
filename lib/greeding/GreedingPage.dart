@@ -7,7 +7,7 @@ import 'package:ins_app/login/HomePageLogin.dart';
 
 import '../Pages1/AccountPage.dart';
 import '../Pages1/HomePage.dart';
-import '../Pages1/CalandarPage.dart';
+
 
 void main() {
   runApp(
@@ -28,7 +28,7 @@ class GreedingPageState extends State<GreedingPage> {
   final List<Widget> listOfPages = [
     HomePage(title: ''),
     StatsPage(),
-    CalandarPage(),
+    //CalandarPage(),
     LoginPage()
   ];
   @override

@@ -4,6 +4,7 @@ import 'package:ins_app/Pages1/SplashScreen.dart';
 import 'package:ins_app/Signup.dart';
 import 'package:ins_app/data_view.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
+import 'package:ins_app/login/HomePageLogin.dart';
 import 'package:ins_app/login/Work/Add.dart';
 import 'package:ins_app/services/AddGeneralInfo.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
@@ -13,6 +14,8 @@ import 'package:ins_app/services/GetData.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import 'login/Work/DeletePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,8 +38,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GreedingPage(),
-      // GreedingPage(),
+      home: DeletePage(),
+      //GreedingPage(),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/AccountPage.dart';
 import 'package:ins_app/Pages1/HomePage.dart';
-import 'package:ins_app/Pages1/CalandarPage.dart';
+
 import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
@@ -122,7 +122,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CalandarPage()),
+                    MaterialPageRoute(builder: (context) => DeletePage()),
                   );
                 },
               ),
@@ -318,7 +318,7 @@ class MyCustomWidget extends StatelessWidget {
         page = Cin_Collector();
         break;
       case " 3":
-        page = CalandarPage();
+        page = DeletePage();
         break;
       case " 4":
         page = EventListPage();
