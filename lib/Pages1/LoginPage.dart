@@ -7,6 +7,7 @@ import 'package:ins_app/Signup.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
 import 'package:ins_app/login/HomePageLoginA.dart';
 import '../ani/BgAnimation.dart';
+import '../login/HomePageLoginC.dart';
 import 'PwdR.dart';
 
 class LoginPage extends StatefulWidget {
@@ -70,10 +71,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             );
-        } else {
-          setState(() {
-            _errorMessage = 'User document not found';
-          });
+          else if (role == 'Citoyen') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => HomePageLoginC(
+                  userEmail: email,
+                  name: name,
+                ),
+              ),
+            );
+          } else {
+            setState(() {
+              _errorMessage = 'User document not found';
+            });
+          }
         }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found' || e.code == 'wrong-password') {

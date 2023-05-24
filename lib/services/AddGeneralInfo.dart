@@ -285,7 +285,7 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
               SizedBox(height: 16.0),
               MaterialButton(
                 onPressed: AddGeneralInfo,
-                color: Color.fromARGB(183, 62, 65, 244),
+                color: Color.fromARGB(255, 94, 6, 247),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -300,7 +300,7 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
                     fontStyle: FontStyle.normal,
                   ),
                 ),
-                textColor: Color(0xff3a57e8),
+                textColor: Color.fromARGB(255, 94, 6, 247),
                 height: 50,
                 minWidth: MediaQuery.of(context).size.width,
               ),

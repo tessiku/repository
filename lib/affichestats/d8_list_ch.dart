@@ -29,7 +29,22 @@ class _d8_list_chState extends State<d8_list_ch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.statsItem),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+            width: 100,
+            child: Transform.scale(
+                scale: 1,
+                child: Text(
+                  widget.statsItem.toString(),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ))),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
         future: _tabRef.where("zone", isEqualTo: widget.statsItem).get(),

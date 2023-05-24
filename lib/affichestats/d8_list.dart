@@ -108,7 +108,22 @@ class _StatsPageState extends State<d8_list> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Indice Gini par grandes entités géographiques'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+            width: 250,
+            child: Transform.scale(
+                scale: 1,
+                child: Text(
+                  'Indice Gini par grandes entités ',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ))),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: Column(
         children: [

@@ -9,7 +9,7 @@ class d9_list extends StatefulWidget {
 class _StatsPageState extends State<d9_list> {
   TextEditingController _searchController = TextEditingController();
   List<String> _statsList = [
-    'Grande Tunisie',
+    'Grand Tunisie',
     'Nord-Est',
     'Nord-ouest',
     'Centre-Est',

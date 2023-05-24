@@ -1,7 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 
-import '../login/Work/Add.dart';
+import '../login/Work/AddPerson.dart';
 import '../login/Work/CheckPage.dart';
 import '../login/Work/DeletePage.dart';
 import '../login/Work/EventListPage.dart';
@@ -95,7 +95,7 @@ class MyCustomWidget extends StatelessWidget {
         page = CheckPage();
         break;
       case "Page 3":
-        page = DeletePage();
+        page = CalendarPage();
         break;
       case "Page 4":
         page = EventListPage();

@@ -1,6 +1,7 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:ins_app/login/Work/DeletePage.dart';
+import 'package:ins_app/login/Work/EventListPage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -16,7 +17,7 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _titel = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _date = TextEditingController();
-
+  final TextEditingController _time = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   void AddEv() async {
@@ -26,6 +27,7 @@ class _AddEventState extends State<AddEvent> {
         "titre": _titel.text,
         "description": _description.text,
         "date": _date.text,
+        "time": _time.text,
       });
     }
   }
@@ -62,7 +64,7 @@ class _AddEventState extends State<AddEvent> {
                   decoration: InputDecoration(
                     hintText: 'ajouter un titre pour votre evenement',
                     border: InputBorder.none,
-                    contentPadding: const EdgeInsets.only(left: 48.0),
+                    prefixIcon: Icon(Icons.title),
                   ),
                 ),
                 Divider(),
@@ -84,10 +86,24 @@ class _AddEventState extends State<AddEvent> {
                   initialValue: widget.selectedDate,
                   fieldHintText: "ajouter un date",
                   inputType: InputType.date,
-                  format: DateFormat("EEEE, MMMM d, yyyy"),
+                  format: DateFormat("EEEE, MMMM d, yyyy "),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.calendar_today_sharp),
+                  ),
+                ),
+                Divider(),
+                FormBuilderDateTimePicker(
+                  controller: _time,
+                  name: "time",
+                  initialValue: widget.selectedDate,
+                  fieldHintText: "Add a time",
+                  inputType:
+                      InputType.time, // Use InputType.time for time picker
+                  format: DateFormat("h:mm a"),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.access_time),
                   ),
                 ),
                 Divider(),
@@ -97,7 +113,7 @@ class _AddEventState extends State<AddEvent> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DeletePage()));
+                              builder: (context) => EventListPage()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 94, 6, 247),

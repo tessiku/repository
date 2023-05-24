@@ -1,37 +1,114 @@
-import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
-import 'package:ins_app/Signup.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
+import 'package:ins_app/services/ModifyData.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
-import 'Admin/UserCollectorA.dart';
-import 'Work/AddPerson.dart';
-import 'Work/CheckPage.dart';
-import 'Work/DeletePage.dart';
-import 'Work/EventListPage.dart';
-//import 'package:ins_app/greeding/Barwork.dart';
 
-class HomePageLoginA extends StatefulWidget {
-  const HomePageLoginA(
+class HomePageLoginC extends StatefulWidget {
+  HomePageLoginC(
       {Key? key, this.title, required this.userEmail, required this.name})
       : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
+  late String cin;
+
   @override
-  State<HomePageLoginA> createState() => _HomePageLoginState();
+  State<HomePageLoginC> createState() => _HomePageLoginCState();
 }
 
-class _HomePageLoginState extends State<HomePageLoginA> {
+class _HomePageLoginCState extends State<HomePageLoginC> {
   List<Article> articles = [];
 
   @override
   void initState() {
     super.initState();
     fetchArticles();
+    checkUserAuth();
+    //getUserUid();
+  }
+
+  /*void getUserUid() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection('Citoyen')
+          .where('UID', isEqualTo: uid)
+          .limit(1)
+          .get()
+          .then((snapshot) => snapshot.docs.first);
+
+      if (snapshot.exists) {
+        String cin = snapshot.get('cin');
+        print('CIN: $cin');
+        // Perform any desired actions with the cin value
+      } else {
+        print('UID not found in Citoyen collection');
+      }
+    }
+  }*/
+  Future<String?> checkUserAuth() async {
+    // Get the current user
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    String? cin1;
+
+    // Check if the user is signed in
+    if (currentUser != null) {
+      // Get the reference to the "Citoyen" collection
+      CollectionReference citoyenCollection =
+          FirebaseFirestore.instance.collection('Citoyen');
+
+      // Query all documents in the "Citoyen" collection
+      QuerySnapshot querySnapshot = await citoyenCollection.get();
+
+      // Iterate over each document in the query snapshot
+      for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
+        // Get the reference to the "data" subcollection inside the document
+        CollectionReference dataCollection =
+            documentSnapshot.reference.collection('data');
+
+        // Query the "uid" document in the "data" subcollection
+        DocumentSnapshot<Object?> uidQuerySnapshot = await dataCollection
+            .doc('uid')
+            .get(); // Assuming 'uid' is the document ID
+
+        // Check if the "uid" document exists
+        if (uidQuerySnapshot.exists) {
+          // Get the data map for the "uid" document
+          Map<String, dynamic>? data =
+              uidQuerySnapshot.data() as Map<String, dynamic>?;
+
+          // Check if the "uid" document has a field named "uid"
+          if (data != null && data.containsKey('uid')) {
+            // Get the value of the "uid" field
+            String? uid = data['uid'];
+
+            // Check if the UID matches the currently signed-in user
+            if (uid == currentUser.uid) {
+              // Retrieve the document ID (CIN) of the matching document
+              String documentId = documentSnapshot.id;
+              print('Document ID (CIN): $documentId');
+              cin1 = documentId;
+              setState(() {
+                widget.cin = documentId;
+              });
+
+              break; // Exit the loop after finding the first match
+            }
+          }
+        }
+      }
+    } else {
+      // User is not signed in
+      print('User is not signed in');
+    }
+    return cin1;
   }
 
   void fetchArticles() async {
@@ -95,7 +172,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomePageLoginA(
+                        builder: (context) => HomePageLoginC(
                               title: 'Home Page',
                               userEmail: widget.userEmail,
                               name: widget.name,
@@ -110,6 +187,19 @@ class _HomePageLoginState extends State<HomePageLoginA> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => StatsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.handshake),
+                title: Text('To do list'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ModifyData(
+                              cin: widget.cin,
+                            )),
                   );
                 },
               ),
@@ -215,108 +305,6 @@ class _HomePageLoginState extends State<HomePageLoginA> {
           ),
         ],
       ),
-      floatingActionButton: MyCustomWidget(),
-    );
-  }
-}
-
-class MyCustomWidget extends StatelessWidget {
-  final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
-
-  @override
-  Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-
-    return Builder(
-      builder: (context) => FabCircularMenu(
-        key: fabKey,
-        alignment: Alignment.bottomRight,
-        ringColor: Color.fromARGB(61, 29, 29, 29).withAlpha(100),
-        ringDiameter: 500.0,
-        ringWidth: 150.0,
-        fabSize: 64.0,
-        fabElevation: 8.0,
-        fabIconBorder: CircleBorder(),
-        fabColor: Color.fromARGB(255, 255, 255, 255),
-        fabOpenIcon: Icon(Icons.menu, color: primaryColor),
-        fabCloseIcon: Icon(Icons.close, color: primaryColor),
-        fabMargin: const EdgeInsets.all(16.0),
-        animationDuration: const Duration(milliseconds: 800),
-        animationCurve: Curves.easeInOutCirc,
-        onDisplayChange: (isOpen) {
-          _showSnackBar(context, "The menu is ${isOpen ? "open" : "closed"}");
-        },
-        children: <Widget>[
-          RawMaterialButton(
-            onPressed: () {
-              _navigateToPage(context, " 1");
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.add, color: Color.fromARGB(255, 255, 255, 255)),
-          ),
-          RawMaterialButton(
-            onPressed: () {
-              _navigateToPage(context, " 2");
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.search, color: Color.fromARGB(255, 0, 250, 137)),
-          ),
-          RawMaterialButton(
-            onPressed: () {
-              _navigateToPage(context, " 3");
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.delete_forever,
-                color: Color.fromARGB(255, 251, 0, 0)),
-          ),
-          RawMaterialButton(
-            onPressed: () {
-              _navigateToPage(context, " 4");
-              fabKey.currentState?.close();
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child:
-                Icon(Icons.add_alert, color: Color.fromARGB(255, 188, 226, 0)),
-          )
-        ],
-      ),
-    );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-      duration: const Duration(milliseconds: 1000),
-    ));
-  }
-
-  void _navigateToPage(BuildContext context, String pageTitle) {
-    Widget page;
-
-    switch (pageTitle) {
-      case " 1":
-        page = SignUp();
-        break;
-      case " 2":
-        page = UserCollector();
-        break;
-      case " 3":
-        page = CalendarPage();
-        break;
-      case " 4":
-        page = EventListPage();
-        break;
-      default:
-        page = Container(); // Provide a fallback page or handle error case
-    }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => page),
     );
   }
 }

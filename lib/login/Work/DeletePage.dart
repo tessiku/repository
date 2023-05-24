@@ -2,21 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:ins_app/model/AddEvent.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class DeletePage extends StatefulWidget {
-  const DeletePage({Key? key}) : super(key: key);
+class CalendarPage extends StatefulWidget {
+  const CalendarPage({Key? key}) : super(key: key);
 
   @override
-  _DeletePageState createState() => _DeletePageState();
+  _CalendarPageState createState() => _CalendarPageState();
 }
 
-class _DeletePageState extends State<DeletePage> {
+class _CalendarPageState extends State<CalendarPage> {
   CalendarController _calendarController = CalendarController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DeletePage'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.event)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

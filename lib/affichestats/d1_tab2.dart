@@ -35,7 +35,22 @@ class _d1_tab2State extends State<d1_tab2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.statsItem.toString()),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+            width: 200,
+            child: Transform.scale(
+                scale: 1,
+                child: Text(
+                  widget.statsItem.toString(),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ))),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
         future: _tabRef.where("Annee", isEqualTo: widget.statsItem).get(),

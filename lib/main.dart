@@ -5,7 +5,7 @@ import 'package:ins_app/Signup.dart';
 import 'package:ins_app/data_view.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
-import 'package:ins_app/login/Work/Add.dart';
+import 'package:ins_app/login/Work/AddPerson.dart';
 import 'package:ins_app/services/AddGeneralInfo.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
 import 'package:ins_app/services/Data_View.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DeletePage(),
+      home: GreedingPage(),
       //GreedingPage(),
     );
   }

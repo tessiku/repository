@@ -11,7 +11,7 @@ import '../api/NewsApi.dart';
 import '../model/Article.dart';
 import 'package:http/http.dart' as http;
 
-import 'Work/Add.dart';
+import 'Work/AddPerson.dart';
 import 'Work/CheckPage.dart';
 import 'Work/DeletePage.dart';
 import 'Work/EventListPage.dart';
@@ -122,7 +122,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DeletePage()),
+                    MaterialPageRoute(builder: (context) => CalendarPage()),
                   );
                 },
               ),
@@ -318,7 +318,7 @@ class MyCustomWidget extends StatelessWidget {
         page = Cin_Collector();
         break;
       case " 3":
-        page = DeletePage();
+        page = CalendarPage();
         break;
       case " 4":
         page = EventListPage();

@@ -16,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   String _selectedRole = "Emp";
-  final List<String> roles = ["Emp", "Admin"];
+  final List<String> roles = ["Emp", "Admin", "Citoyen"];
   bool _isLoading = false;
   String _errorMessage = '';
 
