@@ -50,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
                   child: Image.asset(
-                    'assets/newUser.png',
+                    'assets/adduser.png',
                     width: 100,
                     fit: BoxFit.cover,
                   ),

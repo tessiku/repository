@@ -14,7 +14,7 @@ class _d7State extends State<d7> {
   Widget build(BuildContext context) {
     final String x = 'centre urbaine';
     final String y = 'centre rural';
-    final String z = 'international';
+    final String z = 'national';
     final String y1 = '2010';
     final String y2 = '2015';
     final String y3 = '2021';
@@ -32,7 +32,19 @@ class _d7State extends State<d7> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Évolution de la pauvreté et de l’extrême pauvreté"),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.query_stats)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       body: Column(
         children: <Widget>[

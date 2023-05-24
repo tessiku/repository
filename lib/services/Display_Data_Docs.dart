@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'AddGeneralInfo.dart';
-import 'ModifyData.dart';
+import 'Enquette.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -92,7 +92,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                                   if (snapshot.data!.id == 'Depense') {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => ModifyData(
+                                        builder: (context) => Enquette(
                                           cin: widget.cin,
                                         ),
                                       ),

@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 
 import 'Work/AddPerson.dart';
 import 'Work/CheckPage.dart';
-import 'Work/DeletePage.dart';
+import 'Work/CalendarPage.dart';
 import 'Work/EventListPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 
@@ -312,10 +312,10 @@ class MyCustomWidget extends StatelessWidget {
 
     switch (pageTitle) {
       case " 1":
-        page = AddPerson('');
+        page = AddPerson();
         break;
       case " 2":
-        page = Cin_Collector();
+        page = cin_Collector();
         break;
       case " 3":
         page = CalendarPage();

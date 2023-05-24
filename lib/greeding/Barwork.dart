@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../login/Work/AddPerson.dart';
 import '../login/Work/CheckPage.dart';
-import '../login/Work/DeletePage.dart';
+import '../login/Work/CalendarPage.dart';
 import '../login/Work/EventListPage.dart';
 
 class MyCustomWidget extends StatelessWidget {
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +88,7 @@ class MyCustomWidget extends StatelessWidget {
 
     switch (pageTitle) {
       case "Page 1":
-        page = AddPerson('');
+        page = AddPerson();
         break;
       case "Page 2":
         page = CheckPage();

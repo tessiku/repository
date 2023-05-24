@@ -13,8 +13,20 @@ class _d3State extends State<d5> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Dépenses moyennes par taille de ménage'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.query_stats)),
         ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+      ),
         body: Center(
             child: Container(
                 child: SfCartesianChart(

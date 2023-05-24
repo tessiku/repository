@@ -13,9 +13,20 @@ class _d2State extends State<d2> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              'dépenses annuelles moyennes par habitant par grandes entités géographiques'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.query_stats)),
         ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+      ),
         body: Center(
             child: Container(
                 child: SfCartesianChart(

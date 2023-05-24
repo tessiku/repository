@@ -13,9 +13,20 @@ class _d3State extends State<d3> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              'Évolution des dépenses annuelles moyennes par habitant par quintile de dépenses'),
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.query_stats)),
         ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+      ),
         //backgroundColor: Colors.black,
         body: Center(
             child: Container(

@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../services/AddGeneralInfo.dart';
 
 class AddPerson extends StatefulWidget {
-  final String cin;
-
-  AddPerson(this.cin);
-
   @override
   _AddPersonState createState() => _AddPersonState();
 }
@@ -16,12 +13,18 @@ class AddPerson extends StatefulWidget {
 class _AddPersonState extends State<AddPerson> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _cinController;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  String _errorMessage = '';
+  bool _isLoading = false;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
-    _cinController = TextEditingController(); // <-- initialize the controller
+    _cinController = TextEditingController();
   }
 
   Future<String?> checkCollectionExists(String collectionName) async {
@@ -50,38 +53,101 @@ class _AddPersonState extends State<AddPerson> {
             SnackBar(content: Text('The person with CIN $cin already exists!')),
           );
         } else {
-          await firestore.collection('Citoyen').doc(cin).set({});
-          await firestore
-              .collection('Citoyen')
-              .doc(cin)
-              .collection('data')
-              .doc('General info')
-              .set({});
+          try {
+            UserCredential userCredential =
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: _emailController.text,
+              password: _passwordController.text,
+            );
 
-          await firestore
-              .collection('Citoyen')
-              .doc(cin)
-              .collection('data')
-              .doc('Depense')
-              .set({});
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            User? user = userCredential.user;
+
+            if (user != null) {
+              await user.updateProfile(
+                displayName: _cinController.text,
+              );
+
+              await user.reload();
+            }
+
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user!.uid)
+                .set({
+              'email': _emailController.text,
+              'Name':
+                  _firstNameController.text + ' ' + _lastNameController.text,
+              'lastLogin': DateTime.now(),
+              'Role': "Citoyen",
+            });
+            await FirebaseFirestore.instance
+                .collection('Citoyen')
+                .doc(cin)
+                .set({});
+            await FirebaseFirestore.instance
+                .collection("Citoyen")
+                .doc(cin)
+                .collection('data')
+                .doc('General info')
+                .set({});
+            await FirebaseFirestore.instance
+                .collection("Citoyen")
+                .doc(cin)
+                .collection('data')
+                .doc('Depense')
+                .set({});
+            await FirebaseFirestore.instance
+                .collection("Citoyen")
+                .doc(cin)
+                .collection('data')
+                .doc('UID')
+                .set({'uid': user.uid});
+          } on FirebaseAuthException catch (e) {
+            setState(() {
+              _errorMessage = e.message!;
+            });
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
                 content: Text(
-                    'The person with CIN $cin has been created successfully!')),
-          );
-
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddGeneralInfo(
-                cin: cin,
+                    'The person with CIN $cin has been created successfully!'),
               ),
-            ),
-          );
+            );
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddGeneralInfo(
+                  cin: cin,
+                ),
+              ),
+            );
+          } on FirebaseAuthException catch (e) {
+            setState(() {
+              _errorMessage = e.message!;
+            });
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(_errorMessage),
+              ),
+            );
+          } catch (e) {
+            print(e.toString());
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('An error occurred. Please try again later.'),
+              ),
+            );
+          } finally {
+            setState(() {
+              _isLoading = false;
+            });
+          }
         }
       }
     } else {
-      // Show an error message if the field is empty
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter CIN')),
       );
@@ -92,6 +158,21 @@ class _AddPersonState extends State<AddPerson> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffffffff),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.person_add)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+      ),
       body: Align(
         alignment: Alignment.centerLeft,
         child: Padding(
@@ -156,6 +237,37 @@ class _AddPersonState extends State<AddPerson> {
                         });
                       },
                     ),
+                  ),
+                  //textfield for first name
+                  TextField(
+                    controller: _firstNameController,
+                    decoration: InputDecoration(
+                      labelText: 'First Name',
+                    ),
+                  ),
+                  //textfield for last name
+                  TextField(
+                    controller: _lastNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Last Name',
+                    ),
+                  ),
+
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                    ),
+                  ),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
                   ),
                   MaterialButton(
                     onPressed: createCollection,

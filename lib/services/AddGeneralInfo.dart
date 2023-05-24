@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'ModifyData.dart';
+import 'Enquette.dart';
 
 class AddGeneralInfo extends StatefulWidget {
   final String cin;
@@ -106,7 +106,7 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ModifyData(
+        builder: (context) => Enquette(
           cin: widget.cin,
         ),
       ),

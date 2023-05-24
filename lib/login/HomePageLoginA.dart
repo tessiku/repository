@@ -10,7 +10,7 @@ import '../model/Article.dart';
 import 'Admin/UserCollectorA.dart';
 import 'Work/AddPerson.dart';
 import 'Work/CheckPage.dart';
-import 'Work/DeletePage.dart';
+import 'Work/CalendarPage.dart';
 import 'Work/EventListPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 

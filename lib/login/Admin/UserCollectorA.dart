@@ -76,9 +76,16 @@ class _UserCollectorState extends State<UserCollector> {
               String email = userData?['email'] ?? 'N/A'; // Access email field
               String role = userData?['Role'] ?? 'Employé'; // Access role field
 
-              Color cardColor = role == 'Admin'
-                  ? Color.fromARGB(166, 211, 60, 60)
-                  : Color.fromARGB(166, 60, 58, 181);
+              Color cardColor;
+              if (role == 'Admin') {
+                cardColor = Color.fromARGB(166, 232, 46, 46);
+              } else if (role == 'Citoyen') {
+                cardColor = Colors.green;
+              } else if (role == 'employé') {
+                cardColor = Colors.blue;
+              } else {
+                cardColor = Color.fromARGB(201, 30, 27, 222);
+              }
 
               return AnimatedContainer(
                 duration: Duration(milliseconds: 500),
@@ -190,6 +197,18 @@ class _UserCollectorState extends State<UserCollector> {
                                           title: Text("Admin"),
                                           leading: Radio(
                                             value: "Admin",
+                                            groupValue: selectedRole,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedRole = value.toString();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        ListTile(
+                                          title: Text("Citoyen"),
+                                          leading: Radio(
+                                            value: "Citoyen",
                                             groupValue: selectedRole,
                                             onChanged: (value) {
                                               setState(() {

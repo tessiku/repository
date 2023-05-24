@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
-import 'package:ins_app/services/ModifyData.dart';
+import 'package:ins_app/services/Enquette.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
@@ -15,7 +15,7 @@ class HomePageLoginC extends StatefulWidget {
   final String? title;
   final String userEmail;
   final String name;
-  late String cin;
+  late String cin = '';
 
   @override
   State<HomePageLoginC> createState() => _HomePageLoginCState();
@@ -32,27 +32,6 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
     //getUserUid();
   }
 
-  /*void getUserUid() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      String uid = user.uid;
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-          .instance
-          .collection('Citoyen')
-          .where('UID', isEqualTo: uid)
-          .limit(1)
-          .get()
-          .then((snapshot) => snapshot.docs.first);
-
-      if (snapshot.exists) {
-        String cin = snapshot.get('cin');
-        print('CIN: $cin');
-        // Perform any desired actions with the cin value
-      } else {
-        print('UID not found in Citoyen collection');
-      }
-    }
-  }*/
   Future<String?> checkUserAuth() async {
     // Get the current user
     User? currentUser = FirebaseAuth.instance.currentUser;
@@ -75,7 +54,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
 
         // Query the "uid" document in the "data" subcollection
         DocumentSnapshot<Object?> uidQuerySnapshot = await dataCollection
-            .doc('uid')
+            .doc('UID')
             .get(); // Assuming 'uid' is the document ID
 
         // Check if the "uid" document exists
@@ -197,7 +176,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ModifyData(
+                        builder: (context) => Enquette(
                               cin: widget.cin,
                             )),
                   );

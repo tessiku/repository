@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
+import 'package:ins_app/login/HomePageLoginC.dart';
 import 'package:ins_app/login/Work/CheckPage.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
 
-class ModifyData extends StatefulWidget {
+class Enquette extends StatefulWidget {
   final String cin;
 
-  ModifyData({required this.cin});
+  Enquette({required this.cin});
 
   @override
-  _ModifyDataState createState() => _ModifyDataState();
+  _EnquetteState createState() => _EnquetteState();
 }
 
-class _ModifyDataState extends State<ModifyData> {
+class _EnquetteState extends State<Enquette> {
   final _formKey = GlobalKey<FormState>();
   final _vetementsController = TextEditingController();
   final _nutritionController = TextEditingController();
@@ -75,19 +76,19 @@ class _ModifyDataState extends State<ModifyData> {
               data['divertissement']?.toString() ?? '';
           _transportController.text = data['transport']?.toString() ?? '';
           _servicespublicsController.text =
-              data['servicespublics']?.toString() ?? '';
+              data['services publics']?.toString() ?? '';
           _educationController.text = data['education']?.toString() ?? '';
           _logementController.text = data['logement']?.toString() ?? '';
           _voyagesController.text = data['voyages']?.toString() ?? '';
           _telecommunicationsController.text =
               data['telecommunication']?.toString() ?? '';
           _servicesprofessionnelsController.text =
-              data['servicesprofessionnels']?.toString() ?? '';
+              data['services professionnels']?.toString() ?? '';
           _assurancesController.text = data['assurances']?.toString() ?? '';
           _electroniqueController.text = data['electronique']?.toString() ?? '';
           _impotsController.text = data['impots']?.toString() ?? '';
           _fraisbancairesController.text =
-              data['fraisbancaires']?.toString() ?? '';
+              data['frais bancaires']?.toString() ?? '';
           setState(() {
             _title = 'Update Expenses';
           });
@@ -954,10 +955,7 @@ class _ModifyDataState extends State<ModifyData> {
                             .then((value) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Expenses saved successfully!')));
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => Cin_Collector()),
-                          );
+                          Navigator.pop(context);
                         }).catchError((error) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Failed to save expenses.')));

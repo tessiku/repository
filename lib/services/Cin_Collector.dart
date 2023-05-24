@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ins_app/data_view.dart';
+import 'Data_View.dart';
 
-import 'Data_View.dart'; // show the list of all the target person  //
-
-class Cin_Collector extends StatefulWidget {
+class cin_Collector extends StatefulWidget {
   @override
-  _Cin_CollectorState createState() => _Cin_CollectorState();
+  _cin_CollectorState createState() => _cin_CollectorState();
 }
 
-class _Cin_CollectorState extends State<Cin_Collector> {
+class _cin_CollectorState extends State<cin_Collector> {
   late Stream<QuerySnapshot> _stream;
   TextEditingController _searchController = TextEditingController();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
@@ -32,6 +32,7 @@ class _Cin_CollectorState extends State<Cin_Collector> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldMessengerKey,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 94, 6, 247),
         toolbarHeight: 80,
@@ -130,25 +131,11 @@ class _Cin_CollectorState extends State<Cin_Collector> {
                                             if (collectionExists) {
                                               await deleteAllDocumentsInCollection(
                                                   cin);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content:
-                                                      Text('Document deleted!'),
-                                                  duration:
-                                                      Duration(seconds: 2),
-                                                ),
-                                              );
+                                              _showSnackBar(
+                                                  'Document deleted!');
                                             } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                      'Document not found!'),
-                                                  duration:
-                                                      Duration(seconds: 2),
-                                                ),
-                                              );
+                                              _showSnackBar(
+                                                  'Document not found!');
                                             }
                                           },
                                         ),
@@ -170,9 +157,7 @@ class _Cin_CollectorState extends State<Cin_Collector> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Data_View(
-                                cin: document.id,
-                              ),
+                              builder: (context) => Data_View(cin: document.id),
                             ),
                           );
                         },
@@ -201,6 +186,43 @@ class _Cin_CollectorState extends State<Cin_Collector> {
   }
 
   Future<void> deleteAllDocumentsInCollection(String cin) async {
-    await FirebaseFirestore.instance.collection('Citoyen').doc(cin).delete();
+    try {
+      CollectionReference citoyenCollectionRef =
+          FirebaseFirestore.instance.collection('Citoyen');
+
+      // Get the reference to the "Citoyen" document
+      DocumentReference citoyenDocumentRef = citoyenCollectionRef.doc(cin);
+
+      // Get the reference to the "data" subcollection of the "Citoyen" document
+      CollectionReference dataCollectionRef =
+          citoyenDocumentRef.collection('data');
+
+      // Get the reference to the "UID" document inside the "data" subcollection
+      DocumentReference uidDocumentRef = dataCollectionRef.doc('UID');
+
+      // Get the UID value from the "UID" document
+      DocumentSnapshot<Object?> uidSnapshot = await uidDocumentRef.get();
+      String? uid =
+          (uidSnapshot.data() as Map<String, dynamic>?)?['uid'] as String?;
+
+      if (uid != null) {
+        // Delete the document from the "users" collection using the UID
+        await FirebaseFirestore.instance.collection('users').doc(uid).delete();
+      }
+
+      // Delete the "Citoyen" document
+      await citoyenDocumentRef.delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _showSnackBar(String message) {
+    _scaffoldMessengerKey.currentState?.showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 }

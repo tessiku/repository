@@ -112,13 +112,10 @@ class _StatsPageState extends State<d8_list> {
         toolbarHeight: 80,
         centerTitle: true,
         title: Container(
-            width: 250,
-            child: Transform.scale(
-                scale: 1,
-                child: Text(
-                  'Indice Gini par grandes entités ',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ))),
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.query_stats)),
+        ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),

@@ -38,7 +38,7 @@ class _CalendarPageState extends State<CalendarPage> {
               clipBehavior: Clip.antiAlias,
               child: TableCalendar(
                 calendarController: _calendarController,
-                weekendDays: [6],
+                weekendDays: [6,7],
                 headerStyle: HeaderStyle(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 94, 6, 247),
