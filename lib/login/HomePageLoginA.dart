@@ -7,6 +7,7 @@ import 'package:ins_app/greeding/GreedingPage.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
+import 'Admin/DashBord.dart';
 import 'Admin/UserCollectorA.dart';
 import 'Work/AddPerson.dart';
 import 'Work/CheckPage.dart';
@@ -114,6 +115,20 @@ class _HomePageLoginState extends State<HomePageLoginA> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.dashboard),
+                title: Text('Dash Bord'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DashBord(
+                              name: widget.name,
+                              userEmail: widget.userEmail,
+                            )),
+                  );
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Log out'),
                 onTap: () {
@@ -145,6 +160,9 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               itemCount: articles.length,
               itemBuilder: (BuildContext context, int index) {
                 Article article = articles[index];
+                if (article.title == null || article.description == null) {
+                  return SizedBox();
+                }
                 return GestureDetector(
                   onTap: () {
                     // _navigateToDetails(article);
@@ -269,8 +287,8 @@ class MyCustomWidget extends StatelessWidget {
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.delete_forever,
-                color: Color.fromARGB(255, 251, 0, 0)),
+            child: Icon(Icons.calendar_today,
+                color: Color.fromARGB(255, 232, 232, 232)),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -305,7 +323,7 @@ class MyCustomWidget extends StatelessWidget {
         page = UserCollector();
         break;
       case " 3":
-        page = CalendarPage();
+        page = CalendarPage(name: "name", userEmail: "userEmail");
         break;
       case " 4":
         page = EventListPage();

@@ -94,7 +94,7 @@ class MyCustomWidget extends StatelessWidget {
         page = CheckPage();
         break;
       case "Page 3":
-        page = CalendarPage();
+        page = CalendarPage(name: "name", userEmail: "userEmail");
         break;
       case "Page 4":
         page = EventListPage();

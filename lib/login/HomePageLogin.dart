@@ -122,7 +122,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CalendarPage()),
+                    MaterialPageRoute(builder: (context) => EventListPage()),
                   );
                 },
               ),
@@ -158,6 +158,9 @@ class _HomePageLoginState extends State<HomePageLogin> {
               itemCount: articles.length,
               itemBuilder: (BuildContext context, int index) {
                 Article article = articles[index];
+                if (article.title == null || article.description == null) {
+                  return SizedBox();
+                }
                 return GestureDetector(
                   onTap: () {
                     // _navigateToDetails(article);
@@ -318,7 +321,7 @@ class MyCustomWidget extends StatelessWidget {
         page = cin_Collector();
         break;
       case " 3":
-        page = CalendarPage();
+        //page = CalendarPage();
         break;
       case " 4":
         page = EventListPage();
@@ -326,10 +329,5 @@ class MyCustomWidget extends StatelessWidget {
       default:
         page = Container(); // Provide a fallback page or handle error case
     }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => page),
-    );
   }
 }

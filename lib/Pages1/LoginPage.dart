@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ins_app/Pages1/AccountPage.dart';
-import 'package:ins_app/Pages1/HomePage.dart';
-import 'package:ins_app/Signup.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
 import 'package:ins_app/login/HomePageLoginA.dart';
 import '../ani/BgAnimation.dart';
 import '../login/HomePageLoginC.dart';
 import 'PwdR.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -35,12 +33,15 @@ class _LoginPageState extends State<LoginPage> {
           email: _emailController.text,
           password: _passwordController.text,
         );
+        // Save UID to SharedPreferences
+        String userId = userCredential.user!.uid;
+        await saveUidToSharedPreferences(userId);
 
         // Fetch user document from Firestore
-        String userId = userCredential.user!.uid;
+        String userIds = userCredential.user!.uid;
         DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
             .collection('users')
-            .doc(userId)
+            .doc(userIds)
             .get();
 
         if (userSnapshot.exists) {
@@ -108,6 +109,11 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> saveUidToSharedPreferences(String uid) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('uid', uid);
   }
 
   String? _validateEmail(String? value) {
@@ -338,4 +344,9 @@ class _LoginPageState extends State<LoginPage> {
       ],
     ));
   }
+}
+
+Future<String?> getSavedUidFromSharedPreferences() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('uid');
 }

@@ -1,6 +1,9 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:ins_app/login/HomePageLogin.dart';
+import 'package:ins_app/login/HomePageLoginA.dart';
+import 'package:ins_app/login/Work/CalendarPage.dart';
 import 'package:ins_app/login/Work/EventListPage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +11,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AddEvent extends StatefulWidget {
   final DateTime selectedDate;
 
-  const AddEvent({required this.selectedDate});
+  const AddEvent(
+      {required this.selectedDate,
+      required this.name,
+      required this.userEmail});
+  final String name;
+  final String userEmail;
   @override
   State<AddEvent> createState() => _AddEventState();
 }
@@ -113,7 +121,9 @@ class _AddEventState extends State<AddEvent> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EventListPage()));
+                              builder: (context) => HomePageLoginA(
+                                  name: widget.name,
+                                  userEmail: widget.userEmail)));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 94, 6, 247),

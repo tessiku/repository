@@ -214,6 +214,9 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
               itemCount: articles.length,
               itemBuilder: (BuildContext context, int index) {
                 Article article = articles[index];
+                if (article.title == null || article.description == null) {
+                  return SizedBox();
+                }
                 return GestureDetector(
                   onTap: () {
                     // _navigateToDetails(article);

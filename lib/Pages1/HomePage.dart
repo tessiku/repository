@@ -1,8 +1,9 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
 import '../model/Article.dart';
-import 'package:http/http.dart' as http;
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     fetchArticles();
-    
   }
 
   void fetchArticles() async {
@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
       fit: BoxFit.cover,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +75,9 @@ class _HomePageState extends State<HomePage> {
               itemCount: articles.length,
               itemBuilder: (BuildContext context, int index) {
                 Article article = articles[index];
+                if (article.title == null || article.description == null) {
+                  return SizedBox();
+                }
                 return GestureDetector(
                   onTap: () {
                     // _navigateToDetails(article);
