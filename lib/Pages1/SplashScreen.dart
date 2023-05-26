@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/HomePage.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
 
-class MyCustomSplashScreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
-  _MyCustomSplashScreenState createState() => _MyCustomSplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
+class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   double _fontSize = 2;
   double _containerSize = 1.5;

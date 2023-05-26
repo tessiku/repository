@@ -63,7 +63,8 @@ class Data_View extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Display_Data_Docs(
                         cin: cin,
-                        documentID: document.id,
+                        documentID: document.id, 
+                        
                       ),
                     ));
                   },

@@ -1,4 +1,5 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/AccountPage.dart';
 import 'package:ins_app/Pages1/HomePage.dart';
@@ -12,30 +13,60 @@ import '../model/Article.dart';
 import 'package:http/http.dart' as http;
 
 import 'Work/AddPerson.dart';
-import 'Work/CheckPage.dart';
 import 'Work/CalendarPage.dart';
+import 'Work/CheckPage.dart';
 import 'Work/EventListPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 
 class HomePageLogin extends StatefulWidget {
-  const HomePageLogin(
-      {Key? key, this.title, required this.userEmail, required this.name})
-      : super(key: key);
+  HomePageLogin({
+    Key? key,
+    this.title,
+    required this.userEmail,
+    required this.name,
+  }) : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
+
   @override
   State<HomePageLogin> createState() => _HomePageLoginState();
 }
 
 class _HomePageLoginState extends State<HomePageLogin> {
   List<Article> articles = [];
+ // late String userEmail;
+ // late String name;
+  /*User? getCurrentUser() {
+    // jbli el inforamtion mta3 el user
+    User? user = FirebaseAuth.instance.currentUser;
+    return user;
+  }*/
 
   @override
   void initState() {
     super.initState();
     fetchArticles();
+    setState(() {
+      
+    });
+    //userdata();
   }
+
+  //fetch info current user
+  /*void userdata() async {
+    var user = getCurrentUser();
+    if (user != null) {
+      var email = user.email;
+      
+      setState(() {
+        userEmail = email!;
+        
+      });
+      print(userEmail);
+      print(name);
+    }
+  }*/
 
   void fetchArticles() async {
     NewsApi newsApi = NewsApi();
@@ -48,7 +79,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
   //create a default image in case of error
   Widget _buildDefaultImage() {
     return Image.asset(
-      'assets/images/default.png',
+      'assets/default1.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -129,7 +160,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Log out'),
-                onTap: () {
+                onTap: () async {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => GreedingPage()),
@@ -192,13 +223,13 @@ class _HomePageLoginState extends State<HomePageLogin> {
                                       Object exception,
                                       StackTrace? stackTrace) {
                                     return Image.asset(
-                                      'assets/images/default1.png',
+                                      'assets/default1.jpg',
                                       fit: BoxFit.cover,
                                     );
                                   },
                                 )
                               : Image.asset(
-                                  "assets/images/default1.png",
+                                  "assets/default1.jpg",
                                   fit: BoxFit.cover,
                                 ),
                         ),
@@ -318,10 +349,10 @@ class MyCustomWidget extends StatelessWidget {
         page = AddPerson();
         break;
       case " 2":
-        page = cin_Collector();
+        page = cin_Collector( );
         break;
       case " 3":
-        //page = CalendarPage();
+        page = EventListPage();
         break;
       case " 4":
         page = EventListPage();
@@ -329,5 +360,10 @@ class MyCustomWidget extends StatelessWidget {
       default:
         page = Container(); // Provide a fallback page or handle error case
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
   }
 }

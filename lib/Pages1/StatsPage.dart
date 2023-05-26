@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ins_app/affichestats/d4_list.dart';
+import 'package:ins_app/affichestats/d6_list.dart';
 import 'package:ins_app/affichestats/d8_list.dart';
 
 import '../affichestats/d2.dart';
@@ -63,12 +65,23 @@ class StatsPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => d3()),
                 );
+              } else if (index == 3) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => d4_list()),
+                );
               } else if (index == 4) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => d5()),
                 );
-              } else if (index == 6) {
+              }else if (index == 5) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => d6_list()),
+                );
+              }
+               else if (index == 6) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => d7()),

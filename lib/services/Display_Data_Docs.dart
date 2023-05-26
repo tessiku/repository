@@ -9,8 +9,8 @@ class Display_Data_Docs extends StatefulWidget {
   final String cin;
   final String documentID;
 
-  Display_Data_Docs({required this.cin, required this.documentID});
-
+  Display_Data_Docs({required this.cin, required this.documentID });
+  
   @override
   _Display_Data_DocsState createState() => _Display_Data_DocsState();
 }
@@ -103,6 +103,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                                       MaterialPageRoute(
                                         builder: (context) => AddGeneralInfo(
                                           cin: widget.cin,
+                                          
                                         ),
                                       ),
                                     );

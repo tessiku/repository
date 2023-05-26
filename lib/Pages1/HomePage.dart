@@ -9,9 +9,12 @@ import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.title}) : super(key: key);
   final String? title;
+  
 
   @override
   State<HomePage> createState() => _HomePageState();
+  static String? userEmail; // Global variable for user email
+  static String? name; // Global variable for user name
 }
 
 class _HomePageState extends State<HomePage> {
@@ -21,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     fetchArticles();
+    
   }
 
   void fetchArticles() async {
@@ -109,13 +113,13 @@ class _HomePageState extends State<HomePage> {
                                       Object exception,
                                       StackTrace? stackTrace) {
                                     return Image.asset(
-                                      'assets/images/default1.png',
+                                      'assets/default1.png',
                                       fit: BoxFit.cover,
                                     );
                                   },
                                 )
                               : Image.asset(
-                                  "assets/images/default1.png",
+                                  "assets/default1.png",
                                   fit: BoxFit.cover,
                                 ),
                         ),

@@ -10,11 +10,16 @@ import '../model/Article.dart';
 
 class HomePageLoginC extends StatefulWidget {
   HomePageLoginC(
-      {Key? key, this.title, required this.userEmail, required this.name})
+      {Key? key,
+      this.title,
+      required this.userEmail,
+      required this.name,
+      })
       : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
+  
   late String cin = '';
 
   @override
@@ -101,7 +106,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
   //create a default image in case of error
   Widget _buildDefaultImage() {
     return Image.asset(
-      'assets/images/default.png',
+      'assets/default1.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -248,13 +253,13 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
                                       Object exception,
                                       StackTrace? stackTrace) {
                                     return Image.asset(
-                                      'assets/images/default1.png',
+                                      'assets/default1.jpg',
                                       fit: BoxFit.cover,
                                     );
                                   },
                                 )
                               : Image.asset(
-                                  "assets/images/default1.png",
+                                  "assets/default1.jpg",
                                   fit: BoxFit.cover,
                                 ),
                         ),

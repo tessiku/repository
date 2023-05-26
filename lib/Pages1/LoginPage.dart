@@ -17,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  //
+
   bool _isLoading = false;
   String? _emailError;
   String? _passwordError;
@@ -50,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           //String password = userSnapshot['password'];
           String role = userSnapshot['Role'];
           String name = userSnapshot['Name'];
+          //save role to shared preferences
 
           // Update login date in Firestore
           if (role == 'Emp') {
@@ -116,11 +119,19 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setString('uid', uid);
   }
 
+  /////// save role to shared preferences
+  Future<void> saveRoleToSharedPreferences(String role) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('role', role);
+  }
+
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    if (!value.contains('@')) {
+    if (!value.contains('@') ||
+        !value.contains('.') ||
+        !value.contains('gmail')) {
       return 'Invalid email address';
     }
     return null;
@@ -309,8 +320,13 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             MaterialButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 _authenticate();
+
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.setString(
+                                    'email', _emailController.text);
                               },
                               color: Color.fromARGB(183, 1, 208, 254),
                               elevation: 0,
@@ -349,4 +365,9 @@ class _LoginPageState extends State<LoginPage> {
 Future<String?> getSavedUidFromSharedPreferences() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString('uid');
+}
+
+Future<String?> getSavedRoleFromSharedPreferences() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('role');
 }

@@ -17,11 +17,16 @@ import 'Work/EventListPage.dart';
 
 class HomePageLoginA extends StatefulWidget {
   const HomePageLoginA(
-      {Key? key, this.title, required this.userEmail, required this.name})
+      {Key? key,
+      this.title,
+      required this.userEmail,
+      required this.name,
+      })
       : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
+  
   @override
   State<HomePageLoginA> createState() => _HomePageLoginState();
 }
@@ -46,7 +51,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
   //create a default image in case of error
   Widget _buildDefaultImage() {
     return Image.asset(
-      'assets/images/default.png',
+      'assets/default1.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -194,13 +199,13 @@ class _HomePageLoginState extends State<HomePageLoginA> {
                                       Object exception,
                                       StackTrace? stackTrace) {
                                     return Image.asset(
-                                      'assets/images/default1.png',
+                                      'assets/default1.jpg',
                                       fit: BoxFit.cover,
                                     );
                                   },
                                 )
                               : Image.asset(
-                                  "assets/images/default1.png",
+                                  "assets/default1.jpg",
                                   fit: BoxFit.cover,
                                 ),
                         ),

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ins_app/login/HomePageLogin.dart';
 import 'Enquette.dart';
 
 class AddGeneralInfo extends StatefulWidget {
@@ -12,6 +14,7 @@ class AddGeneralInfo extends StatefulWidget {
 }
 
 class _AddGeneralInfoState extends State<AddGeneralInfo> {
+  late User? currentUser;
   final _formKey = GlobalKey<FormState>();
   String _selectedSalaire = 'Moins que 500 DT';
   String _selectedNombre_p = '1-2 personnes';
@@ -74,7 +77,13 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void AddGeneralInfo() async {
+  @override
+  void initState() {
+    super.initState();
+    currentUser = FirebaseAuth.instance.currentUser;
+  }
+
+  void addInfo() async {
     if (_formKey.currentState!.validate()) {
       final docSnapshot = await firestore
           .collection('Citoyen')
@@ -103,11 +112,13 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
         SnackBar(content: Text('Data added successfully!')),
       );
     }
+
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Enquette(
-          cin: widget.cin,
+        builder: (context) => HomePageLogin(
+          userEmail: currentUser!.email ?? '',
+          name: currentUser!.displayName ?? '',
         ),
       ),
     );
@@ -284,7 +295,7 @@ class _AddGeneralInfoState extends State<AddGeneralInfo> {
               ),
               SizedBox(height: 16.0),
               MaterialButton(
-                onPressed: AddGeneralInfo,
+                onPressed: addInfo,
                 color: Color.fromARGB(255, 94, 6, 247),
                 elevation: 0,
                 shape: RoundedRectangleBorder(

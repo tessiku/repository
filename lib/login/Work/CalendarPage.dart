@@ -1,12 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:ins_app/model/AddEvent.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key,required this.name , required this.userEmail}) : super(key: key);
+  const CalendarPage({Key? key, required this.name, required this.userEmail})
+      : super(key: key);
   final String name;
   final String userEmail;
   @override
@@ -143,12 +142,34 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           onPressed: () {
             final selectedDate = _calendarController.selectedDay;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddEvent(selectedDate: selectedDate , name: widget.name , userEmail: widget.userEmail),
-              ),
-            );
+            final currentDate = DateTime.now();
+            if (selectedDate.isBefore(currentDate)) {
+              // If selected date is before current date
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Date non valide'),
+                  content: Text(
+                      'Impossible de créer un événement pour une date précédente.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEvent(
+                      selectedDate: selectedDate,
+                      name: widget.name,
+                      userEmail: widget.userEmail),
+                ),
+              );
+            }
           },
           backgroundColor: Color.fromARGB(255, 94, 6, 247),
           child: Column(

@@ -2,12 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ins_app/login/HomePageLogin.dart';
 
 import '../../services/AddGeneralInfo.dart';
 
 class AddPerson extends StatefulWidget {
+  User? getCurrentUser() {
+    // jbli el inforamtion mta3 el user
+    User? user = FirebaseAuth.instance.currentUser;
+    return user;
+  }
+
   @override
   _AddPersonState createState() => _AddPersonState();
+  void userdata() async {
+    var user = getCurrentUser();
+    if (user != null) {
+      var email = user.email;
+      var name = user.displayName;
+    }
+  }
 }
 
 class _AddPersonState extends State<AddPerson> {
@@ -207,6 +221,7 @@ class _AddPersonState extends State<AddPerson> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
                     child: OtpTextField(
+                      keyboardType: TextInputType.number,
                       numberOfFields: 8,
                       showFieldAsBox: false,
                       fieldWidth: 40,
