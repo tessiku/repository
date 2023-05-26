@@ -6,6 +6,7 @@ import 'package:ins_app/Pages1/HomePage.dart';
 
 import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
+import 'package:ins_app/login/Admin/dash2.dart';
 import 'package:ins_app/services/Cin_Collector.dart';
 import '../display/ArticlePage.dart';
 import '../api/NewsApi.dart';
@@ -352,7 +353,7 @@ class MyCustomWidget extends StatelessWidget {
         page = cin_Collector( );
         break;
       case " 3":
-        page = EventListPage();
+        page = RegionCitoyen();
         break;
       case " 4":
         page = EventListPage();
