@@ -96,10 +96,10 @@ class _UserCollectorState extends State<UserCollector> {
                     Color cardColor;
                     Color textColor;
                     if (role == 'Admin') {
-                      cardColor = Color.fromRGBO(54, 122, 231, 0.675);
+                      cardColor = Color.fromARGB(255, 53, 183, 239);
                       textColor = Colors.white;
                     } else if (role == 'Emp') {
-                      cardColor = Color.fromARGB(126, 1, 38, 69);
+                      cardColor = Color.fromARGB(180, 41, 200, 184);
                       textColor = Colors.white;
                     } else {
                       cardColor = Color.fromARGB(198, 242, 211, 211);
@@ -144,12 +144,14 @@ class _UserCollectorState extends State<UserCollector> {
                           children: [
                             IconButton(
                               icon: Icon(Icons.delete),
+                              color: Colors.black,
                               onPressed: () async {
                                 // Delete user logic
                               },
                             ),
                             IconButton(
                               icon: Icon(Icons.edit),
+                              color: Colors.black,
                               onPressed: () {
                                 // Update role logic
                               },

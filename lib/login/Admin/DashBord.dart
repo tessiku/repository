@@ -297,7 +297,7 @@ class _DashBordState extends State<DashBord> {
           bottomLeft: Radius.circular(20.0),
           bottomRight: Radius.circular(20.0),
         ),
-        color: Colors.blue,
+        color: Color.fromARGB(255, 94, 6, 247),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

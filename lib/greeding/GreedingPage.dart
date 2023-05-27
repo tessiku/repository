@@ -8,16 +8,6 @@ import 'package:ins_app/login/HomePageLogin.dart';
 import '../Pages1/AccountPage.dart';
 import '../Pages1/HomePage.dart';
 
-
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Bottom Navigation Bar',
-      home: GreedingPage(),
-    ),
-  );
-}
-
 class GreedingPage extends StatefulWidget {
   @override
   GreedingPageState createState() => GreedingPageState();
@@ -28,9 +18,9 @@ class GreedingPageState extends State<GreedingPage> {
   final List<Widget> listOfPages = [
     HomePage(title: ''),
     StatsPage(),
-    //CalandarPage(),
-    LoginPage()
+    LoginPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
@@ -43,7 +33,7 @@ class GreedingPageState extends State<GreedingPage> {
           children: listOfPages,
         ),
         bottomNavigationBar: Container(
-          margin: EdgeInsets.all(displayWidth * .05),
+          margin: EdgeInsets.all(displayWidth * .02),
           height: displayWidth * .155,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -57,7 +47,7 @@ class GreedingPageState extends State<GreedingPage> {
             borderRadius: BorderRadius.circular(50),
           ),
           child: ListView.builder(
-            itemCount: 4,
+            itemCount: 3, // Number of pages
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
             itemBuilder: (context, index) => InkWell(
@@ -69,85 +59,90 @@ class GreedingPageState extends State<GreedingPage> {
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              child: Stack(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    width: index == currentIndex
-                        ? displayWidth * .32
-                        : displayWidth * .18,
-                    alignment: Alignment.center,
-                    child: AnimatedContainer(
+              child: Container(
+                width: displayWidth * 0.32, // Adjust the width as needed
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
                       duration: Duration(seconds: 1),
                       curve: Curves.fastLinearToSlowEaseIn,
-                      height: index == currentIndex ? displayWidth * .12 : 0,
-                      width: index == currentIndex ? displayWidth * .32 : 0,
-                      decoration: BoxDecoration(
-                        color: index == currentIndex
-                            ? Color.fromARGB(255, 161, 0, 254).withOpacity(.2)
-                            : Color.fromARGB(0, 239, 233, 233),
-                        borderRadius: BorderRadius.circular(50),
+                      width: index == currentIndex
+                          ? displayWidth * .32
+                          : displayWidth * .18,
+                      alignment: Alignment.center,
+                      child: AnimatedContainer(                           //shadow of the page indicator display 
+                        duration: Duration(seconds: 1), 
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        height: index == currentIndex ? displayWidth * .12 : 0,
+                        width: index == currentIndex ? displayWidth * .28 : 0,
+                        decoration: BoxDecoration(
+                          color: index == currentIndex
+                              ? Color.fromARGB(255, 67, 67, 67).withOpacity(.2)
+                              : Color.fromARGB(0, 31, 31, 31),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
                     ),
-                  ),
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    width: index == currentIndex
-                        ? displayWidth * .31
-                        : displayWidth * .18,
-                    alignment: Alignment.center,
-                    child: Stack(
-                      children: [
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == currentIndex
-                                  ? displayWidth * .13
-                                  : 0,
-                            ),
-                            AnimatedOpacity(
-                              opacity: index == currentIndex ? 1 : 0,
-                              duration: Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              child: Text(
-                                index == currentIndex
-                                    ? '${listOfStrings[index]}'
-                                    : '',
-                                style: TextStyle(
-                                  color: Color.fromARGB(166, 131, 75, 244),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                    AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      width: index == currentIndex
+                          ? displayWidth * .31
+                          : displayWidth * .18,
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Row(
+                            children: [
+                              AnimatedContainer(
+                                duration: Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                width: index == currentIndex
+                                    ? displayWidth * .13
+                                    : 0,
+                              ),
+                              AnimatedOpacity(
+                                opacity: index == currentIndex ? 1 : 0,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                child: Text(
+                                  index == currentIndex
+                                      ? '${listOfStrings[index]}'
+                                      : '',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(166, 18, 18,
+                                        18),                                      // Name of the page indicator color
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == currentIndex
-                                  ? displayWidth * .03
-                                  : 20,
-                            ),
-                            Icon(
-                              listOfIcons[index],
-                              size: displayWidth * .076,
-                              color: index == currentIndex
-                                  ? Colors.blueAccent
-                                  : Colors.black26,
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              AnimatedContainer(
+                                duration: Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                width: index == currentIndex
+                                    ? displayWidth * .03
+                                    : 20,
+                              ),
+                              Icon(
+                                listOfIcons[index],
+                                size: displayWidth * .076,
+                                color: index == currentIndex
+                                    ? Color.fromARGB(255, 0, 0,
+                                        0) // Color of the icon of the page
+                                    : Colors.black26,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -160,13 +155,11 @@ class GreedingPageState extends State<GreedingPage> {
     Icons.home_rounded,
     Icons.favorite_rounded,
     Icons.settings_rounded,
-    Icons.person_rounded,
   ];
 
   List<String> listOfStrings = [
     'Home',
     'Favorite',
     'Settings',
-    'Account',
   ];
 }

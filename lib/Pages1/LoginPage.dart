@@ -156,7 +156,14 @@ class _LoginPageState extends State<LoginPage> {
 
         body: Stack(
       children: [
-        CircularParticleScreen2(),
+        //CircularParticleScreen2(),
+        Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/stats.jpg"),
+            fit: BoxFit.cover,
+          )),
+        ),
         Align(
           alignment: Alignment.center,
           child: Padding(
@@ -177,21 +184,26 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                         ),
-                        child: Image.asset("assets/insSplash.jpg",
-                            fit: BoxFit.cover),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Login Now ",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 24,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                        child: FractionallySizedBox(
+                          widthFactor:
+                              1, // Adjust this value as needed to reduce the size
+                          heightFactor:
+                              0.7, // Adjust this value as needed to reduce the size
+                          child: Image.asset(
+                            "assets/INS_T.png",
+                            fit: BoxFit.cover,
                           ),
+                        ),
+                      ),
+                      Text(
+                        " ",
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 24,
+                          color: Color.fromRGBO(0, 0, 0, 1),
                         ),
                       ),
                       Padding(
@@ -206,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                             fontSize: 16,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 16, 16, 16), //
                           ),
                           decoration: InputDecoration(
                             disabledBorder: OutlineInputBorder(
@@ -218,13 +230,13 @@ class _LoginPageState extends State<LoginPage> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4.0),
                               borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Color.fromARGB(255, 99, 99, 99),
                                   width: 1),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4.0),
                               borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Color.fromARGB(255, 99, 99, 99),
                                   width: 1),
                             ),
                             labelText: "Email",
@@ -232,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                               fontSize: 16,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Color.fromARGB(255, 5, 5, 5),
                             ),
                             filled: true,
                             fillColor: Color.fromARGB(0, 255, 255, 255),
@@ -252,23 +264,24 @@ class _LoginPageState extends State<LoginPage> {
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                           fontSize: 16,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 0, 0, 0),
                         ),
                         decoration: InputDecoration(
                           disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4.0),
-                            borderSide:
-                                BorderSide(color: Color(0xff9e9e9e), width: 1),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 5, 5, 5), width: 1),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4.0),
-                            borderSide:
-                                BorderSide(color: Color(0xff9e9e9e), width: 1),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 99, 99, 99),
+                                width: 1),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Color.fromARGB(255, 99, 99, 99),
                                 width: 1),
                           ),
                           labelText: "Mot de passe",
@@ -276,7 +289,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                             fontSize: 16,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                           filled: true,
                           fillColor: Color.fromARGB(0, 255, 255, 255),
@@ -299,7 +312,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 14,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Color.fromARGB(255, 6, 6, 6),
                               ),
                             ),
                             onTap: () {
@@ -328,21 +341,21 @@ class _LoginPageState extends State<LoginPage> {
                                 sharedPreferences.setString(
                                     'email', _emailController.text);
                               },
-                              color: Color.fromARGB(183, 1, 208, 254),
+                              color: Color.fromARGB(121, 232, 232, 232),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               padding: EdgeInsets.all(16),
                               child: Text(
-                                "Login",
+                                "connectez",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
                                 ),
                               ),
-                              textColor: Color.fromRGBO(255, 255, 255, 1),
+                              textColor: Color.fromRGBO(6, 6, 6, 1),
                               height: 40,
                               minWidth: 140,
                             ),

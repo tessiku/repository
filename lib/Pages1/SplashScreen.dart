@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
                 duration: Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
-                  'Welcome TO INS APP',
+                  'bienvinue  à  SatsTn',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen>
                     borderRadius: BorderRadius.circular(30),
                   ),
                   // child: Image.asset('assets/images/file_name.png')
-                  child: Image.asset("assets/ins_r.png")),
+                  child: Image.asset("assets/INS_T.png")),
             ),
           ),
         ],

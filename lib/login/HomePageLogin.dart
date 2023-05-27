@@ -36,8 +36,8 @@ class HomePageLogin extends StatefulWidget {
 
 class _HomePageLoginState extends State<HomePageLogin> {
   List<Article> articles = [];
- // late String userEmail;
- // late String name;
+  // late String userEmail;
+  // late String name;
   /*User? getCurrentUser() {
     // jbli el inforamtion mta3 el user
     User? user = FirebaseAuth.instance.currentUser;
@@ -48,9 +48,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
   void initState() {
     super.initState();
     fetchArticles();
-    setState(() {
-      
-    });
+    setState(() {});
     //userdata();
   }
 
@@ -301,7 +299,7 @@ class MyCustomWidget extends StatelessWidget {
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.add, color: Color.fromARGB(255, 255, 255, 255)),
+            child: Icon(Icons.add, color: Color.fromARGB(255, 244, 83, 30)),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -350,7 +348,7 @@ class MyCustomWidget extends StatelessWidget {
         page = AddPerson();
         break;
       case " 2":
-        page = cin_Collector( );
+        page = cin_Collector();
         break;
       case " 3":
         page = RegionCitoyen();

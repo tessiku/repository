@@ -57,6 +57,7 @@ dependencies:
   firebase_auth: ^4.4.2
   #particles_flutter: ^0.1.4
   firebase_messaging: ^14.4.0
+  lint: ^1.9.2
 
   localization: ^2.1.0
   syncfusion_localizations: ^19.4.56

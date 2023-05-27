@@ -16,17 +16,16 @@ import 'Work/EventListPage.dart';
 //import 'package:ins_app/greeding/Barwork.dart';
 
 class HomePageLoginA extends StatefulWidget {
-  const HomePageLoginA(
-      {Key? key,
-      this.title,
-      required this.userEmail,
-      required this.name,
-      })
-      : super(key: key);
+  const HomePageLoginA({
+    Key? key,
+    this.title,
+    required this.userEmail,
+    required this.name,
+  }) : super(key: key);
   final String? title;
   final String userEmail;
   final String name;
-  
+
   @override
   State<HomePageLoginA> createState() => _HomePageLoginState();
 }
@@ -276,7 +275,7 @@ class MyCustomWidget extends StatelessWidget {
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: Icon(Icons.add, color: Color.fromARGB(255, 255, 255, 255)),
+            child: Icon(Icons.add, color: Colors.red),
           ),
           RawMaterialButton(
             onPressed: () {
