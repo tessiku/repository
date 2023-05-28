@@ -68,14 +68,14 @@ class _SignUpState extends State<SignUp> {
                 TextField(
                   controller: _firstNameController,
                   decoration: InputDecoration(
-                    labelText: 'First Name',
+                    labelText: 'prenom',
                   ),
                 ),
                 SizedBox(height: 16.0),
                 TextField(
                   controller: _lastNameController,
                   decoration: InputDecoration(
-                    labelText: 'Last Name',
+                    labelText: 'nom',
                   ),
                 ),
                 SizedBox(height: 16.0),
@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Mot de passe',
                   ),
                 ),
                 SizedBox(height: 15),
@@ -142,7 +142,7 @@ class _SignUpState extends State<SignUp> {
         _firstNameController.text.isEmpty ||
         _lastNameController.text.isEmpty) {
       setState(() {
-        _errorMessage = 'Please fill in all fields.';
+        _errorMessage = 'Merci de remplir tous les champs.';
       });
       return;
     }

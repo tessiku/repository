@@ -1,27 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
-
 import '../../services/AddGeneralInfo.dart';
 
 class AddPerson extends StatefulWidget {
   User? getCurrentUser() {
-    // jbli el inforamtion mta3 el user
     User? user = FirebaseAuth.instance.currentUser;
     return user;
   }
 
   @override
   _AddPersonState createState() => _AddPersonState();
-  void userdata() async {
-    var user = getCurrentUser();
-    if (user != null) {
-      var email = user.email;
-      var name = user.displayName;
-    }
-  }
 }
 
 class _AddPersonState extends State<AddPerson> {
@@ -94,32 +84,32 @@ class _AddPersonState extends State<AddPerson> {
               'lastLogin': DateTime.now(),
               'Role': "Citoyen",
             });
+
             await FirebaseFirestore.instance
                 .collection('Citoyen')
                 .doc(cin)
                 .set({});
+
             await FirebaseFirestore.instance
                 .collection("Citoyen")
                 .doc(cin)
                 .collection('data')
                 .doc('General info')
                 .set({});
+
             await FirebaseFirestore.instance
                 .collection("Citoyen")
                 .doc(cin)
                 .collection('data')
                 .doc('Depense')
                 .set({});
+
             await FirebaseFirestore.instance
                 .collection("Citoyen")
                 .doc(cin)
                 .collection('data')
                 .doc('UID')
                 .set({'uid': user.uid});
-          } on FirebaseAuthException catch (e) {
-            setState(() {
-              _errorMessage = e.message!;
-            });
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -166,6 +156,13 @@ class _AddPersonState extends State<AddPerson> {
         SnackBar(content: Text('Please enter CIN')),
       );
     }
+  }
+
+  bool isNumeric(String? value) {
+    if (value == null) {
+      return false;
+    }
+    return double.tryParse(value) != null;
   }
 
   @override
@@ -220,66 +217,76 @@ class _AddPersonState extends State<AddPerson> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
-                    child: OtpTextField(
-                      keyboardType: TextInputType.number,
-                      numberOfFields: 8,
-                      showFieldAsBox: false,
-                      fieldWidth: 40,
-                      filled: true,
-                      fillColor: Color(0x00000000),
-                      enabledBorderColor: Color(0xff898a8e),
-                      focusedBorderColor: Color(0xff3a57e8),
-                      borderWidth: 2,
-                      margin: EdgeInsets.all(0),
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      obscureText: false,
-                      borderRadius: BorderRadius.circular(4.0),
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 20,
-                        color: Color(0xff000000),
+                    child: TextFormField(
+                      controller: _cinController,
+                      decoration: InputDecoration(
+                        labelText: 'CIN',
                       ),
-                      onCodeChanged: (String value) {
-                        setState(() {
-                          _cinController.text = value;
-                        });
-                      },
-                      onSubmit: (String value) {
-                        setState(() {
-                          _cinController.text = value;
-                        });
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the CIN';
+                        }
+                        if (value.length != 8) {
+                          return 'CIN must have 8 characters';
+                        }
+                        if (!isNumeric(value)) {
+                          return 'CIN must contain only numeric characters';
+                        }
+                        return null;
                       },
                     ),
                   ),
-                  //textfield for first name
-                  TextField(
+                  TextFormField(
                     controller: _firstNameController,
                     decoration: InputDecoration(
                       labelText: 'First Name',
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your first name';
+                      }
+                      return null;
+                    },
                   ),
-                  //textfield for last name
-                  TextField(
+                  TextFormField(
                     controller: _lastNameController,
                     decoration: InputDecoration(
                       labelText: 'Last Name',
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your last name';
+                      }
+                      return null;
+                    },
                   ),
-
-                  TextField(
+                  TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!value.contains('@') || !value.contains('.')) {
+                        return 'Invalid email address';
+                      }
+                      return null;
+                    },
                   ),
-                  TextField(
+                  TextFormField(
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 15,

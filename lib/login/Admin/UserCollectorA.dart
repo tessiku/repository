@@ -13,49 +13,26 @@ class _UserCollectorState extends State<UserCollector> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
 
-  Future<bool> checkCollectionExists(String uid) async {
-    bool exists = false;
-    try {
-      DocumentSnapshot<Map<String, dynamic>> snapshot =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      exists = snapshot.exists;
-    } catch (e) {
-      print(e);
-    }
-    return exists;
-  }
-
-  Future<void> deleteAllDocumentsInCollection(String uid) async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).delete();
-  }
-
-  Future<void> updateRole(String uid, String role) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .update({'Role': role});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 94, 6, 247),
-          toolbarHeight: 80,
-          centerTitle: true,
-          title: Container(
-            width: 100,
-            height: 100,
-            child:
-                Transform.scale(scale: 1.5, child: Icon(Icons.verified_user)),
-          ),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 94, 6, 247),
+        toolbarHeight: 80,
+        centerTitle: true,
+        title: Container(
+          width: 100,
+          height: 100,
+          child: Transform.scale(scale: 1.5, child: Icon(Icons.verified_user)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
           ),
         ),
-        body: Column(children: [
+      ),
+      body: Column(
+        children: [
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
@@ -87,23 +64,31 @@ class _UserCollectorState extends State<UserCollector> {
                         document.data() as Map<String, dynamic>?;
 
                     String name =
-                        userData?['Name'] ?? 'N/A'; // Access Name field
-                    String email =
-                        userData?['email'] ?? 'N/A'; // Access email field
-                    String role =
-                        userData?['Role'] ?? 'Employé'; // Access role field
+                        userData?['Name'] ?? 'N/A'; // jib el name mta3 el user
+                    String email = userData?['email'] ??
+                        'N/A'; // jib el email mta3 el user
+                    String role = userData?['Role'] ??
+                        'Employé'; // jib el role mta3 el user
+                    if (role == 'Citoyen') {
+                      return SizedBox();
+                    }
 
                     Color cardColor;
                     Color textColor;
+                    late AssetImage avatarImage; // inisialiser avatarImage
+
                     if (role == 'Admin') {
                       cardColor = Color.fromARGB(255, 53, 183, 239);
                       textColor = Colors.white;
+                      avatarImage = AssetImage('assets/adminavatar.png');
                     } else if (role == 'Emp') {
                       cardColor = Color.fromARGB(180, 41, 200, 184);
                       textColor = Colors.white;
+                      avatarImage = AssetImage('assets/avatar_male.png');
                     } else {
-                      cardColor = Color.fromARGB(198, 242, 211, 211);
+                      cardColor = Colors.white;
                       textColor = Colors.black;
+                      //avatarImage = AssetImage('assets/default_avatar.png');
                     }
 
                     return AnimatedContainer(
@@ -125,7 +110,7 @@ class _UserCollectorState extends State<UserCollector> {
                       child: ListTile(
                         leading: CircleAvatar(
                           radius: 28,
-                          backgroundImage: AssetImage('assets/adduser.png'),
+                          backgroundImage: avatarImage,
                         ), // Person icon
                         title: Text(
                           name,
@@ -146,14 +131,147 @@ class _UserCollectorState extends State<UserCollector> {
                               icon: Icon(Icons.delete),
                               color: Colors.black,
                               onPressed: () async {
-                                // Delete user logic
+                                String uid = document.id;
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("supprimer l'utilisateur"),
+                                      content: Text(" Voulez-vous supprimer "
+                                          "l'utilisateur ?"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text("Annuler"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                          child: Text("Confirmer"),
+                                          onPressed: () async {
+                                            Navigator.of(context).pop();
+                                            bool collectionExists =
+                                                await checkCollectionExists(
+                                                    uid);
+                                            if (collectionExists) {
+                                              await deleteAllDocumentsInCollection(
+                                                  uid);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text('supprimer l'
+                                                      'utilisateur'),
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                ),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content:
+                                                      Text('utilisateur non '
+                                                          'trouvé !'),
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                             ),
                             IconButton(
                               icon: Icon(Icons.edit),
                               color: Colors.black,
                               onPressed: () {
-                                // Update role logic
+                                String uid = document.id;
+                                String selectedRole = role;
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Modifier le role"),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ListTile(
+                                            title: Text("Employé"),
+                                            leading: Radio(
+                                              value: "Emp",
+                                              groupValue: selectedRole,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedRole =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          ListTile(
+                                            title: Text("Admin"),
+                                            leading: Radio(
+                                              value: "Admin",
+                                              groupValue: selectedRole,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedRole =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text("annuler"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                          child: Text("confirmer"),
+                                          onPressed: () async {
+                                            Navigator.of(context).pop();
+                                            bool collectionExists =
+                                                await checkCollectionExists(
+                                                    uid);
+                                            if (collectionExists) {
+                                              await updateRole(
+                                                  uid, selectedRole);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content:
+                                                      Text('role mis à jour'),
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                ),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content:
+                                                      Text('utilisateur non '
+                                                          'trouvé !'),
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                             ),
                           ],
@@ -166,6 +284,31 @@ class _UserCollectorState extends State<UserCollector> {
               },
             ),
           ),
-        ]));
+        ],
+      ),
+    );
+  }
+
+  Future<bool> checkCollectionExists(String uid) async {
+    bool exists = false;
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      exists = snapshot.exists;
+    } catch (e) {
+      print(e);
+    }
+    return exists;
+  }
+
+  Future<void> deleteAllDocumentsInCollection(String uid) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).delete();
+  }
+
+  Future<void> updateRole(String uid, String role) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'Role': role});
   }
 }

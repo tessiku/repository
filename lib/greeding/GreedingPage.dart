@@ -70,8 +70,9 @@ class GreedingPageState extends State<GreedingPage> {
                           ? displayWidth * .32
                           : displayWidth * .18,
                       alignment: Alignment.center,
-                      child: AnimatedContainer(                           //shadow of the page indicator display 
-                        duration: Duration(seconds: 1), 
+                      child: AnimatedContainer(
+                        //shadow of the page indicator display
+                        duration: Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
                         height: index == currentIndex ? displayWidth * .12 : 0,
                         width: index == currentIndex ? displayWidth * .28 : 0,
@@ -111,7 +112,7 @@ class GreedingPageState extends State<GreedingPage> {
                                       : '',
                                   style: TextStyle(
                                     color: Color.fromARGB(166, 18, 18,
-                                        18),                                      // Name of the page indicator color
+                                        18), // Name of the page indicator color
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
                                   ),
@@ -158,8 +159,8 @@ class GreedingPageState extends State<GreedingPage> {
   ];
 
   List<String> listOfStrings = [
-    'Home',
-    'Favorite',
-    'Settings',
+    'accueil',
+    'stat',
+    'login',
   ];
 }

@@ -13,13 +13,13 @@ class _StatsPageState extends State<d6_list> {
     'santé',
     'tabac',
     'restocafe',
-    'electromenager',
+    'electro-menager',
     'éducation',
     'divertissement',
     'vêtements',
     'logement',
     'transport',
-    'communication',
+    'Communications',
   ];
   List<String> _filteredStatsList = [];
 
@@ -78,11 +78,11 @@ class _StatsPageState extends State<d6_list> {
         MaterialPageRoute(
             builder: (context) => d6_list_ch(statsItem: 'restocafe')),
       );
-    } else if (statsItem == 'electromenager') {
+    } else if (statsItem == 'electro-menager') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d6_list_ch(statsItem: ' electromenager')),
+            builder: (context) => d6_list_ch(statsItem: 'electro-menager')),
       );
     } else if (statsItem == 'éducation') {
       Navigator.push(
@@ -100,7 +100,7 @@ class _StatsPageState extends State<d6_list> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d6_list_ch(statsItem: '  vêtements')),
+            builder: (context) => d6_list_ch(statsItem: 'vêtements')),
       );
     }
     if (statsItem == 'logement') {
@@ -115,11 +115,11 @@ class _StatsPageState extends State<d6_list> {
         MaterialPageRoute(
             builder: (context) => d6_list_ch(statsItem: 'transport')),
       );
-    } else if (statsItem == 'communication') {
+    } else if (statsItem == 'Communications') {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => d6_list_ch(statsItem: 'communication')),
+            builder: (context) => d6_list_ch(statsItem: 'Communications')),
       );
     }
   }

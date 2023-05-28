@@ -62,122 +62,13 @@ class _DashBordState extends State<DashBord> {
           _buildHeader(),
           const SizedBox(height: 20.0),
           const Padding(
-            padding: EdgeInsets.only(left: 16.0),
+            padding: EdgeInsets.only(left: 120.0),
             child: Text(
               "votre Dashboard ",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
           ),
-          FutureBuilder<int>(
-            future: getUsersCount('Emp'), // Fetch count of employees
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final employeeCount = snapshot.data!;
-                return FutureBuilder<int>(
-                  future: getUsersCount('Citoyen'), // Fetch count of citizens
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final citizenCount = snapshot.data!;
-                      return Card(
-                        elevation: 4.0,
-                        color: Colors.white,
-                        margin: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: ListTile(
-                                leading: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  width: 45.0,
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 20,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 25,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 40,
-                                        width: 8.0,
-                                        color: Colors.blue,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 30,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                title: const Text("Aujourd'hui"),
-                                subtitle: Text("18 enquetes"),
-                              ),
-                            ),
-                            const VerticalDivider(),
-                            Expanded(
-                              child: ListTile(
-                                leading: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  width: 45.0,
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 20,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 25,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 40,
-                                        width: 8.0,
-                                        color: Colors.red,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Container(
-                                        height: 30,
-                                        width: 8.0,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                title: const Text("Canceled"),
-                                subtitle: Text("7"),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("Error: ${snapshot.error}");
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
-                );
-              } else if (snapshot.hasError) {
-                return Text("Error: ${snapshot.error}");
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
+          SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
@@ -256,11 +147,23 @@ class _DashBordState extends State<DashBord> {
                 ),
                 const SizedBox(width: 16.0),
                 Expanded(
-                  child: _buildTile(
-                    color: Colors.pink,
-                    icon: Icons.portrait,
-                    title: "Personne connectée",
-                    data: "857",
+                  child: FutureBuilder<int>(
+                    future: getUsersSum(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final usersCount = snapshot.data!;
+                        return _buildTile(
+                          color: Colors.pink,
+                          icon: Icons.portrait,
+                          title: "Utilisateurs enregistrés",
+                          data: usersCount.toString(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
                   ),
                 ),
                 const SizedBox(width: 16.0),
@@ -316,8 +219,8 @@ class _DashBordState extends State<DashBord> {
                   fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             trailing: CircleAvatar(
-              radius: 25.0,
-              backgroundImage: AssetImage('assets/avatar1.jpg'),
+              radius: 40.0,
+              backgroundImage: AssetImage('assets/adminavatar.png'),
             ),
           ),
           const SizedBox(height: 10.0),
@@ -381,6 +284,12 @@ class _DashBordState extends State<DashBord> {
         .collection('users')
         .where('Role', isEqualTo: role)
         .get();
+    return querySnapshot.size;
+  }
+
+  Future<int> getUsersSum() async {
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('users').get();
     return querySnapshot.size;
   }
 

@@ -87,14 +87,14 @@ class _LoginPageState extends State<LoginPage> {
             );
           } else {
             setState(() {
-              _errorMessage = 'User document not found';
+              _errorMessage = 'Role invalide';
             });
           }
         }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found' || e.code == 'wrong-password') {
           setState(() {
-            _errorMessage = 'Invalid email or password';
+            _errorMessage = 'invalid email ou mot de passe';
           });
         } else {
           setState(() {
@@ -108,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
       }
     } else {
       setState(() {
-        _errorMessage = 'Please fix the errors in red before submitting.';
+        _errorMessage =
+            'Veuillez corriger les erreurs en rouge avant de soumettre.';
         _isLoading = false;
       });
     }
@@ -127,22 +128,22 @@ class _LoginPageState extends State<LoginPage> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return 'email est requis';
     }
     if (!value.contains('@') ||
         !value.contains('.') ||
         !value.contains('gmail')) {
-      return 'Invalid email address';
+      return 'email invalide';
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password is required';
+      return 'Password est requis';
     }
     if (value.length < 6) {
-      return 'Password must be at least 6 characters';
+      return 'Password doit contenir au moins 6 caractères';
     }
     return null;
   }
@@ -305,7 +306,7 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
                             child: Text(
-                              "Forgot Password ?",
+                              "Mot de passe oublié?",
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.clip,
                               style: TextStyle(
@@ -318,8 +319,7 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => PasswordReset()),
+                                MaterialPageRoute(builder: (context) => PwdR()),
                               );
                             },
                           ),

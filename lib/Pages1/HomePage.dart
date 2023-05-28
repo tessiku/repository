@@ -9,7 +9,6 @@ import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.title}) : super(key: key);
   final String? title;
-  
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     fetchArticles();
-    
   }
 
   void fetchArticles() async {
@@ -65,11 +63,13 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.all(16),
-            child: const Text(
-              'Suggested Articles',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          Center(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              child: const Text(
+                'Actualités',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
           ),
           Expanded(

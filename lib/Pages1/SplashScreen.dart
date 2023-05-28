@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
                 duration: Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
-                  'bienvinue  à  SatsTn',
+                  'Bienvenue à Stats TN',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

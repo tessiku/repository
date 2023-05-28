@@ -146,13 +146,6 @@ class _cin_CollectorState extends State<cin_Collector> {
                                 );
                               },
                             ),
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              color: Colors.green,
-                              onPressed: () {
-                                // Handle edit icon tap
-                              },
-                            ),
                           ],
                         ),
                         onTap: () {

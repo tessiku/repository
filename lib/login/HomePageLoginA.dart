@@ -83,8 +83,8 @@ class _HomePageLoginState extends State<HomePageLoginA> {
                 accountName: Text(widget.name),
                 accountEmail: Text(widget.userEmail),
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                  backgroundImage: AssetImage('assets/avatar_male.png'),
+                  backgroundColor: Color.fromARGB(59, 181, 181, 181),
+                  backgroundImage: AssetImage('assets/adminavatar.png'),
                 ),
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -95,13 +95,13 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.home),
-                title: Text('Home'),
+                title: Text('page d\'accueil'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => HomePageLoginA(
-                              title: 'Home Page',
+                              title: 'page d\'accueil',
                               userEmail: widget.userEmail,
                               name: widget.name,
                             )),
@@ -110,7 +110,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.query_stats_outlined),
-                title: Text('Stats'),
+                title: Text('statistiques'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -120,7 +120,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.dashboard),
-                title: Text('Dash Bord'),
+                title: Text('Dashboard'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -134,7 +134,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('Log out'),
+                title: Text('Déconnexion'),
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -153,7 +153,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
           Container(
             padding: EdgeInsets.all(16),
             child: const Text(
-              'News',
+              'Actualités',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
@@ -266,7 +266,8 @@ class MyCustomWidget extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 800),
         animationCurve: Curves.easeInOutCirc,
         onDisplayChange: (isOpen) {
-          _showSnackBar(context, "The menu is ${isOpen ? "open" : "closed"}");
+          _showSnackBar(
+              context, "Votre menu est  ${isOpen ? "ouvert" : "fermé"}");
         },
         children: <Widget>[
           RawMaterialButton(

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ins_app/Pages1/LoginPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PasswordReset extends StatefulWidget {
+class PwdR extends StatefulWidget {
   @override
-  _PasswordResetState createState() => _PasswordResetState();
+  _PwdRState createState() => _PwdRState();
 }
 
-class _PasswordResetState extends State<PasswordReset> {
+class _PwdRState extends State<PwdR> {
   final TextEditingController _emailController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = "";
@@ -28,6 +29,18 @@ class _PasswordResetState extends State<PasswordReset> {
     }
 
     try {
+      // Query Firestore to check if the email exists in the "users" collection
+      final userRef = FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email);
+      final userSnapshot = await userRef.get();
+      if (userSnapshot.docs.isEmpty) {
+        setState(() {
+          _errorMessage = "User with this email doesn't exist.";
+        });
+        return false;
+      }
+
       await _auth.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -37,18 +50,13 @@ class _PasswordResetState extends State<PasswordReset> {
       );
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        setState(() {
-          _errorMessage = "User with this email doesn't exist.";
-        });
-      } else {
-        setState(() {
-          _errorMessage = "Error: ${e.message}";
-        });
-      }
+      setState(() {
+        _errorMessage = "Error: ${e.message}";
+      });
+      return false;
     }
-    bool resetSuccessful = true; // set to true if successful, false otherwise
-    return resetSuccessful;
+
+    return true; // Password reset email sent successfully
   }
 
   @override
@@ -72,11 +80,21 @@ class _PasswordResetState extends State<PasswordReset> {
             color: Color(0xff000000),
           ),
         ),
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Color(0xff212435),
-          size: 24,
-        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
+            icon: Icon(
+              Icons.close,
+              color: Color(0xff000000),
+              size: 24,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),

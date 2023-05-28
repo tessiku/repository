@@ -82,7 +82,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
                 if (snapshot.hasError) {
                   return Center(
-                    child: Text('Failed to load events'),
+                    child: Text('Échec du chargement des événements!'),
                   );
                 }
 

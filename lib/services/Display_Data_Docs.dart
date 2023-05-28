@@ -9,8 +9,8 @@ class Display_Data_Docs extends StatefulWidget {
   final String cin;
   final String documentID;
 
-  Display_Data_Docs({required this.cin, required this.documentID });
-  
+  Display_Data_Docs({required this.cin, required this.documentID});
+
   @override
   _Display_Data_DocsState createState() => _Display_Data_DocsState();
 }
@@ -103,7 +103,6 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                                       MaterialPageRoute(
                                         builder: (context) => AddGeneralInfo(
                                           cin: widget.cin,
-                                          
                                         ),
                                       ),
                                     );
@@ -141,7 +140,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                               // Perform actions on tap if needed
                             },
                             child: Card(
-                              color: Color.fromARGB(255, 94, 6, 247),
+                              color: Color.fromARGB(255, 192, 192, 192),
                               shadowColor: Color.fromARGB(255, 210, 210, 210),
                               elevation: 100,
                               child: Padding(
@@ -198,14 +197,11 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
   }
 
   Icon _getIconForEntry(String key) {
-    // Define the icon mapping based on your requirements
     switch (key) {
       case 'nutrition':
         return Icon(Icons.food_bank_outlined);
       case 'vetements':
         return Icon(Icons.shopping_bag_outlined);
-      case 'devertissement':
-        return Icon(Icons.sports_esports_outlined);
       case 'sante':
         return Icon(Icons.medical_services_outlined);
       case 'profession':
@@ -220,9 +216,32 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
         return Icon(Icons.money_outlined);
       case 'type':
         return Icon(Icons.category_outlined);
+      case 'divertissement':
+        return Icon(Icons.sports_esports_outlined);
+      case 'transport':
+        return Icon(Icons.commute_outlined);
+      case 'services publics':
+        return Icon(Icons.home_outlined);
+      case 'education':
+        return Icon(Icons.school_outlined);
+      case 'logement':
+        return Icon(Icons.house_outlined);
+      case 'voyages':
+        return Icon(Icons.flight_outlined);
+      case 'telecommunications':
+        return Icon(Icons.phone_outlined);
+      case 'services professionnels':
+        return Icon(Icons.business_outlined);
+      case 'assurances':
+        return Icon(Icons.security_outlined);
+      case 'electronique':
+        return Icon(Icons.devices_outlined);
+      case 'impots':
+        return Icon(Icons.attach_money_outlined);
+      case 'frais bancaires':
+        return Icon(Icons.account_balance_outlined);
       default:
-        // Return a default icon if no mapping is found
-        return Icon(Icons.info);
+        return Icon(Icons.error_outline);
     }
   }
 }
