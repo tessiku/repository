@@ -58,6 +58,8 @@ dependencies:
   #particles_flutter: ^0.1.4
   firebase_messaging: ^14.4.0
   lint: ^1.9.2
+  
+  
 
   localization: ^2.1.0
   syncfusion_localizations: ^19.4.56
@@ -69,10 +71,17 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   fab_circular_menu: ^1.0.2
   flutter_otp_text_field: ^1.1.1
+  flutter_launcher_icons: ^0.12.0
 
 dev_dependencies:
+  
   flutter_test:
     sdk: flutter
+  
+flutter_icons:
+  android: true
+  image_path: "assets/INS_T.png"  
+  adaptive_icon_background: "#ffffff"  
   flutter_native_splash: any  
 flutter_native_splash:    
   color: "#ffffff"
