@@ -124,13 +124,13 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.home),
-                title: Text('Home'),
+                title: Text('Page d\'accueil'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => HomePageLogin(
-                              title: 'Home Page',
+                              title: 'Page d\'accueil',
                               userEmail: widget.userEmail,
                               name: widget.name,
                             )),
@@ -139,7 +139,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.query_stats_outlined),
-                title: Text('Stats'),
+                title: Text('Statistiques'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -149,7 +149,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.calendar_view_day),
-                title: Text('To do list'),
+                title: Text('événement'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -159,7 +159,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('Log out'),
+                title: Text('Se déconnecter'),
                 onTap: () async {
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -178,7 +178,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
           Container(
             padding: EdgeInsets.all(16),
             child: const Text(
-              'News',
+              'actualités',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
@@ -291,7 +291,7 @@ class MyCustomWidget extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 800),
         animationCurve: Curves.easeInOutCirc,
         onDisplayChange: (isOpen) {
-          _showSnackBar(context, "The menu is ${isOpen ? "open" : "closed"}");
+          _showSnackBar(context, "Le menu est ${isOpen ? "ouvrir" : "fermé"}");
         },
         children: <Widget>[
           RawMaterialButton(

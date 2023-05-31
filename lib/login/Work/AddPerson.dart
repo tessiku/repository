@@ -47,14 +47,15 @@ class _AddPersonState extends State<AddPerson> {
       final cin = _cinController.text.trim();
       if (cin.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enter CIN')),
+          SnackBar(content: Text('Veuillez saisir le CIN')),
         );
       } else {
         final existingCollection = await checkCollectionExists('Citoyen');
 
         if (existingCollection != null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('The person with CIN $cin already exists!')),
+            SnackBar(
+                content: Text('La personne atteinte de CIN $cin existe déjà!')),
           );
         } else {
           try {
@@ -114,7 +115,7 @@ class _AddPersonState extends State<AddPerson> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                    'The person with CIN $cin has been created successfully!'),
+                    'La personne atteinte de CIN $cin a été créé avec succès!'),
               ),
             );
 
@@ -141,7 +142,8 @@ class _AddPersonState extends State<AddPerson> {
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('An error occurred. Please try again later.'),
+                content: Text(
+                    'Une erreur s\'est produite. Veuillez réessayer plus tard.'),
               ),
             );
           } finally {
@@ -153,7 +155,7 @@ class _AddPersonState extends State<AddPerson> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter CIN')),
+        SnackBar(content: Text('Veuillez entrer CIN')),
       );
     }
   }
@@ -224,13 +226,13 @@ class _AddPersonState extends State<AddPerson> {
                       ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter the CIN';
+                          return 'Veuillez entrer le CIN';
                         }
                         if (value.length != 8) {
-                          return 'CIN must have 8 characters';
+                          return 'CIN doit avoir 8 caractères';
                         }
                         if (!isNumeric(value)) {
-                          return 'CIN must contain only numeric characters';
+                          return 'Le CIN ne doit contenir que des caractères numériques';
                         }
                         return null;
                       },
@@ -239,11 +241,11 @@ class _AddPersonState extends State<AddPerson> {
                   TextFormField(
                     controller: _firstNameController,
                     decoration: InputDecoration(
-                      labelText: 'First Name',
+                      labelText: 'Prénom',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your first name';
+                        return 'Entrez votre prénom s\'il vous plait';
                       }
                       return null;
                     },
@@ -251,11 +253,11 @@ class _AddPersonState extends State<AddPerson> {
                   TextFormField(
                     controller: _lastNameController,
                     decoration: InputDecoration(
-                      labelText: 'Last Name',
+                      labelText: 'Nom de famille',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your last name';
+                        return 'Veuillez entrer votre nom de famille';
                       }
                       return null;
                     },
@@ -267,10 +269,10 @@ class _AddPersonState extends State<AddPerson> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'Veuillez saisir votre e-mail';
                       }
                       if (!value.contains('@') || !value.contains('.')) {
-                        return 'Invalid email address';
+                        return 'Adresse e-mail invalide';
                       }
                       return null;
                     },
@@ -283,7 +285,7 @@ class _AddPersonState extends State<AddPerson> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
+                        return 'Veuillez saisir votre mot de passe';
                       }
                       return null;
                     },

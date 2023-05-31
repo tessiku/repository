@@ -60,7 +60,7 @@ class _cin_CollectorState extends State<cin_Collector> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                labelText: 'Search by CIN',
+                labelText: 'Recherche par CIN',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
@@ -109,16 +109,16 @@ class _cin_CollectorState extends State<cin_Collector> {
                                     return AlertDialog(
                                       title: Text("Confirm Deletion"),
                                       content: Text(
-                                          "Are you sure you want to delete this document?"),
+                                          "vous etes sur de supprimer ce document!"),
                                       actions: <Widget>[
                                         TextButton(
-                                          child: Text("Cancel"),
+                                          child: Text("annuler"),
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
                                         ),
                                         ElevatedButton(
-                                          child: Text("Delete"),
+                                          child: Text("supprimer"),
                                           style: ElevatedButton.styleFrom(
                                             primary: Colors.red,
                                           ),
@@ -133,10 +133,10 @@ class _cin_CollectorState extends State<cin_Collector> {
                                               await deleteAllDocumentsInCollection(
                                                   cin);
                                               _showSnackBar(
-                                                  'Document deleted!');
+                                                  'doucment supprimé !');
                                             } else {
                                               _showSnackBar(
-                                                  'Document not found!');
+                                                  'doucment n\'existe pas !');
                                             }
                                           },
                                         ),

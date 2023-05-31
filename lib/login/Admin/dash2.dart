@@ -49,7 +49,7 @@ class RegionCitoyen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Card(
-                      color: Color.fromARGB(238, 97, 93, 96),
+                      color: Color.fromARGB(237, 63, 63, 100),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
