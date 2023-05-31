@@ -39,6 +39,18 @@ class _HomePageLoginState extends State<HomePageLoginA> {
     fetchArticles();
   }
 
+  void getname() {
+    setState(() {
+      widget.name;
+    });
+  }
+
+  void getemail() {
+    setState(() {
+      widget.userEmail;
+    });
+  }
+
   void fetchArticles() async {
     NewsApi newsApi = NewsApi();
     List<Article> fetchedArticles = await newsApi.fetchData();
@@ -237,12 +249,24 @@ class _HomePageLoginState extends State<HomePageLoginA> {
           ),
         ],
       ),
-      floatingActionButton: MyCustomWidget(),
+      floatingActionButton: MyCustomWidget(name: widget.name, userEmail:widget.userEmail),
     );
   }
 }
 
-class MyCustomWidget extends StatelessWidget {
+class MyCustomWidget extends StatefulWidget {
+  final String userEmail;
+  final String name;
+  const MyCustomWidget({
+    Key? key,
+    required this.userEmail,
+    required this.name,
+  }) : super(key: key);
+  @override
+  State<MyCustomWidget> createState() => _MyCustomWidgetState();
+}
+
+class _MyCustomWidgetState extends State<MyCustomWidget> {
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
   @override
@@ -328,7 +352,10 @@ class MyCustomWidget extends StatelessWidget {
         page = UserCollector();
         break;
       case " 3":
-        page = CalendarPage(name: "name", userEmail: "userEmail");
+        page = CalendarPage(
+          name: widget.name,
+          userEmail: widget.userEmail,
+        );
         break;
       case " 4":
         page = EventListPage();

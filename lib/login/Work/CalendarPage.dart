@@ -4,10 +4,11 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key, required this.name, required this.userEmail})
-      : super(key: key);
   final String name;
   final String userEmail;
+  CalendarPage({Key? key, required this.name, required this.userEmail})
+      : super(key: key);
+  
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
