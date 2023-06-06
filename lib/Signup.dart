@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ins_app/Pages1/StatsPage.dart';
+
 import 'package:ins_app/login/Admin/UserCollectorA.dart';
-import 'package:ins_app/login/HomePageLoginA.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -180,9 +179,7 @@ class _SignUpState extends State<SignUp> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => UserCollector(),
-        ),
+        MaterialPageRoute(builder: (context) => UserCollector()),
       );
     } on FirebaseAuthException catch (e) {
       setState(() {

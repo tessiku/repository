@@ -5,7 +5,6 @@ import 'package:ins_app/Pages1/StatsPage.dart';
 import 'package:ins_app/Signup.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
 
-import '../Pages1/AccountPage.dart';
 import '../Pages1/HomePage.dart';
 
 class GreedingPage extends StatefulWidget {
@@ -39,7 +38,7 @@ class GreedingPageState extends State<GreedingPage> {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(.1),
+                color: Color.fromARGB(255, 134, 36, 225).withOpacity(.1),
                 blurRadius: 30,
                 offset: Offset(0, 10),
               ),
@@ -51,7 +50,9 @@ class GreedingPageState extends State<GreedingPage> {
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
             itemBuilder: (context, index) => InkWell(
+              // InkWell is a widget that makes the page indicator clickable
               onTap: () {
+                // and it's used to change the page fi el navigation bar
                 setState(() {
                   currentIndex = index;
                   HapticFeedback.lightImpact();
@@ -111,8 +112,8 @@ class GreedingPageState extends State<GreedingPage> {
                                       ? '${listOfStrings[index]}'
                                       : '',
                                   style: TextStyle(
-                                    color: Color.fromARGB(166, 18, 18,
-                                        18), // Name of the page indicator color
+                                    color: Color.fromARGB(245, 73, 23,
+                                        224), // Name of the page indicator color
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
                                   ),
@@ -130,11 +131,12 @@ class GreedingPageState extends State<GreedingPage> {
                                     : 20,
                               ),
                               Icon(
+                                // Icon of the page indicator
                                 listOfIcons[index],
                                 size: displayWidth * .076,
                                 color: index == currentIndex
-                                    ? Color.fromARGB(255, 0, 0,
-                                        0) // Color of the icon of the page
+                                    ? Color.fromARGB(255, 45, 38,
+                                        233) // Color of the icon of the page
                                     : Colors.black26,
                               ),
                             ],
@@ -154,7 +156,7 @@ class GreedingPageState extends State<GreedingPage> {
 
   List<IconData> listOfIcons = [
     Icons.home_rounded,
-    Icons.favorite_rounded,
+    Icons.stacked_bar_chart_sharp,
     Icons.settings_rounded,
   ];
 

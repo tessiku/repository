@@ -37,11 +37,11 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
         toolbarHeight: 80,
         centerTitle: true,
         title: Container(
-          width: 150,
+          width: 100,
           child: Transform.scale(
-            scale: 1,
+            scale: 1.2,
             child: Text(
-              'Display Data',
+              'Documents',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
           ),
@@ -61,7 +61,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
             if (!snapshot.hasData || snapshot.data == null) {
-              return Center(child: Text('No data found.'));
+              return Center(child: Text('non resultats'));
             }
 
             final data = snapshot.data!.data()!;
@@ -84,7 +84,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                               child: MaterialButton(
                                 height: 50,
                                 minWidth: 100,
-                                color: Color.fromARGB(194, 168, 168, 168),
+                                color: Color.fromARGB(194, 27, 148, 235),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
@@ -140,7 +140,7 @@ class _Display_Data_DocsState extends State<Display_Data_Docs> {
                               // Perform actions on tap if needed
                             },
                             child: Card(
-                              color: Color.fromARGB(255, 192, 192, 192),
+                              color: Color.fromARGB(194, 27, 148, 235),
                               shadowColor: Color.fromARGB(255, 210, 210, 210),
                               elevation: 100,
                               child: Padding(

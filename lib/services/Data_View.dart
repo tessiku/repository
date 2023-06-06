@@ -16,7 +16,7 @@ class Data_View extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Color(0xff212435),
+            color: Color.fromARGB(255, 255, 255, 255),
             size: 24,
           ),
           onPressed: () {
@@ -25,11 +25,11 @@ class Data_View extends StatelessWidget {
         ),
         centerTitle: true,
         title: Container(
-          width: 100,
+          width: 200,
           child: Transform.scale(
             scale: 1,
             child: Text(
-              'Data View',
+              'Donées de $cin',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),

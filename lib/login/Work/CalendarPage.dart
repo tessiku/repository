@@ -8,7 +8,7 @@ class CalendarPage extends StatefulWidget {
   final String userEmail;
   CalendarPage({Key? key, required this.name, required this.userEmail})
       : super(key: key);
-  
+
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -144,14 +144,16 @@ class _CalendarPageState extends State<CalendarPage> {
           onPressed: () {
             final selectedDate = _calendarController.selectedDay;
             final currentDate = DateTime.now();
-            if (selectedDate.isBefore(currentDate)) {
-              // If selected date is before current date
+            final startOfCurrentDay =
+                DateTime(currentDate.year, currentDate.month, currentDate.day);
+            if (selectedDate.isBefore(startOfCurrentDay)) {
+              // If selected date is before the start of the current day
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text('Date non valide'),
                   content: Text(
-                      'Impossible de créer un événement pour une date précédente.'),
+                      'Impossible de créer un événement pour une date antérieure à aujourd\'hui.'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),

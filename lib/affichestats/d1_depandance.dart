@@ -3,20 +3,20 @@ import 'package:ins_app/affichestats/d1_tab1.dart';
 
 import 'd1_tab2.dart';
 
-class d4_depandance extends StatefulWidget {
+class StatsList extends StatefulWidget {
   @override
-  State<d4_depandance> createState() => _d4_depandanceState();
+  State<StatsList> createState() => _StatsListState();
 }
 
-class _d4_depandanceState extends State<d4_depandance> {
+class _StatsListState extends State<StatsList> {
   TextEditingController _searchController = TextEditingController();
   List<String> _statsList = [
-    'stats for  2010 moyennes pour la famille ',
-    'stats for 2015 moyennes pour la famille',
-    'stats for 2021 moyennes pour la famille',
-    'stats for 2010 moyennes pour le personnel',
-    'stats for 2015 moyennes pour le personnel',
-    'stats for 2021 moyennes pour le personnel',
+    'stats pour 2010 moyennes pour la famille ',
+    'stats pour 2015 moyennes pour la famille',
+    'stats pour 2021 moyennes pour la famille',
+    'stats pour 2010 moyennes pour le personnel',
+    'stats pour 2015 moyennes pour le personnel',
+    'stats pour 2021 moyennes pour le personnel',
   ];
   List<String> _filteredStatsList = [];
 
@@ -51,34 +51,34 @@ class _d4_depandanceState extends State<d4_depandance> {
       _filteredStatsList = filteredList;
     });
   }
-
+                                                                      //route to the stats pages with the year
   void _navigateToStatsPage(BuildContext context, String statsItem) {
-    if (statsItem == 'stats for  2010 moyennes pour la famille ') {
+    if (statsItem == 'stats pour  2010 moyennes pour la famille ') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2010)),
       );
-    } else if (statsItem == 'stats for 2015 moyennes pour la famille') {
+    } else if (statsItem == 'stats pour 2015 moyennes pour la famille') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2015)),
       );
-    } else if (statsItem == 'stats for 2021 moyennes pour la famille') {
+    } else if (statsItem == 'stats pour 2021 moyennes pour la famille') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2021)),
       );
-    } else if (statsItem == 'stats for 2010 moyennes pour le personnel') {
+    } else if (statsItem == 'stats pour 2010 moyennes pour le personnel') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2010)),
       );
-    } else if (statsItem == 'stats for 2015 moyennes pour le personnel') {
+    } else if (statsItem == 'stats pour 2015 moyennes pour le personnel') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2015)),
       );
-    } else if (statsItem == 'stats for 2021 moyennes pour le personnel') {
+    } else if (statsItem == 'stats pour 2021 moyennes pour le personnel') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab2(statsItem: 2021)),

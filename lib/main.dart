@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ins_app/Pages1/SplashScreen.dart';
 import 'package:ins_app/Signup.dart';
-import 'package:ins_app/data_view.dart';
 import 'package:ins_app/greeding/GreedingPage.dart';
 import 'package:ins_app/login/HomePageLogin.dart';
 import 'package:ins_app/login/Work/AddPerson.dart';

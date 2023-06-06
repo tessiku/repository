@@ -53,7 +53,7 @@ class StatsPage extends StatelessWidget {
               if (index == 0) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => d4_depandance()),
+                  MaterialPageRoute(builder: (context) => StatsList()),
                 );
               } else if (index == 1) {
                 Navigator.push(

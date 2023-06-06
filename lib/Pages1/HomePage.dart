@@ -72,13 +72,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Expanded(
+          Expanded(                              // Expanded widget for the list view of articles
             child: ListView.builder(
               physics:
                   BouncingScrollPhysics(), // smoothly screen view scrolling
               itemCount: articles.length,
               itemBuilder: (BuildContext context, int index) {
-                Article article = articles[index];
+                Article article = articles[index];               // Article object
                 if (article.title == null || article.description == null) {
                   return SizedBox();
                 }
@@ -152,9 +152,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(     // Floating action button for chat bot bech n7ell conversation m3ah 
           onPressed: () async {
             try {
+              await KommunicateFlutterPlugin.logout();
               dynamic conversationObject = {
                 'appId':
                     '25aefadf29154e9cf2f13546d53acbb12' // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
