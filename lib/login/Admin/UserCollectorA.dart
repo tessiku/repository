@@ -11,6 +11,7 @@ class _UserCollectorState extends State<UserCollector> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  String selectedRole = '';
 
   @override
   Widget build(BuildContext context) {
@@ -62,19 +63,16 @@ class _UserCollectorState extends State<UserCollector> {
                     Map<String, dynamic>? userData =
                         document.data() as Map<String, dynamic>?;
 
-                    String name =
-                        userData?['Name'] ?? 'N/A'; // jib el name mta3 el user
-                    String email = userData?['email'] ??
-                        'N/A'; // jib el email mta3 el user
-                    String role = userData?['Role'] ??
-                        'Employé'; // jib el role mta3 el user
+                    String name = userData?['Name'] ?? 'N/A';
+                    String email = userData?['email'] ?? 'N/A';
+                    String role = userData?['Role'] ?? 'Employé';
                     if (role == 'Citoyen') {
                       return SizedBox();
                     }
 
                     Color cardColor;
                     Color textColor;
-                    late AssetImage avatarImage; // inisialiser avatarImage
+                    late AssetImage avatarImage;
 
                     if (role == 'Admin') {
                       cardColor = Color.fromARGB(255, 53, 183, 239);
@@ -87,7 +85,6 @@ class _UserCollectorState extends State<UserCollector> {
                     } else {
                       cardColor = Colors.white;
                       textColor = Colors.black;
-                      //avatarImage = AssetImage('assets/default_avatar.png');
                     }
 
                     return AnimatedContainer(
@@ -110,7 +107,7 @@ class _UserCollectorState extends State<UserCollector> {
                         leading: CircleAvatar(
                           radius: 28,
                           backgroundImage: avatarImage,
-                        ), // Person icon
+                        ),
                         title: Text(
                           name,
                           style: TextStyle(
@@ -135,9 +132,9 @@ class _UserCollectorState extends State<UserCollector> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text("supprimer l'utilisateur"),
-                                      content: Text(" Voulez-vous supprimer "
-                                          "l'utilisateur ?"),
+                                      title: Text("Supprimer l'utilisateur"),
+                                      content: Text(
+                                          "Voulez-vous supprimer l'utilisateur ?"),
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text("Annuler"),
@@ -158,7 +155,7 @@ class _UserCollectorState extends State<UserCollector> {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
-                                                  content: Text('supprimer l'
+                                                  content: Text('Supprimer l'
                                                       'utilisateur'),
                                                   duration:
                                                       Duration(seconds: 2),
@@ -168,9 +165,8 @@ class _UserCollectorState extends State<UserCollector> {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
-                                                  content:
-                                                      Text('utilisateur non '
-                                                          'trouvé !'),
+                                                  content: Text(
+                                                      'Utilisateur non trouvé!'),
                                                   duration:
                                                       Duration(seconds: 2),
                                                 ),
@@ -189,85 +185,87 @@ class _UserCollectorState extends State<UserCollector> {
                               color: Colors.black,
                               onPressed: () {
                                 String uid = document.id;
-                                String selectedRole = role;
 
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text("Modifier le role"),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ListTile(
-                                            title: Text("Employé"),
-                                            leading: Radio(
-                                              value: "Emp",
-                                              groupValue: selectedRole,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  selectedRole =
-                                                      value.toString();
-                                                });
+                                    return StatefulBuilder(
+                                      builder: (context, setState) {
+                                        return AlertDialog(
+                                          title: Text("Modifier le rôle"),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              ListTile(
+                                                title: Text("Employé"),
+                                                leading: Radio(
+                                                  value: "Emp",
+                                                  groupValue: selectedRole,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      selectedRole =
+                                                          value.toString();
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                              ListTile(
+                                                title: Text("Admin"),
+                                                leading: Radio(
+                                                  value: "Admin",
+                                                  groupValue: selectedRole,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      selectedRole =
+                                                          value.toString();
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text("Annuler"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
                                               },
                                             ),
-                                          ),
-                                          ListTile(
-                                            title: Text("Admin"),
-                                            leading: Radio(
-                                              value: "Admin",
-                                              groupValue: selectedRole,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  selectedRole =
-                                                      value.toString();
-                                                });
+                                            ElevatedButton(
+                                              child: Text("Confirmer"),
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                                bool collectionExists =
+                                                    await checkCollectionExists(
+                                                        uid);
+                                                if (collectionExists) {
+                                                  await updateRole(
+                                                      uid, selectedRole);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          'Rôle mis à jour'),
+                                                      duration:
+                                                          Duration(seconds: 2),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          'Utilisateur non trouvé!'),
+                                                      duration:
+                                                          Duration(seconds: 2),
+                                                    ),
+                                                  );
+                                                }
                                               },
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text("annuler"),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                          child: Text("confirmer"),
-                                          onPressed: () async {
-                                            Navigator.of(context).pop();
-                                            bool collectionExists =
-                                                await checkCollectionExists(
-                                                    uid);
-                                            if (collectionExists) {
-                                              await updateRole(
-                                                  uid, selectedRole);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content:
-                                                      Text('role mis à jour'),
-                                                  duration:
-                                                      Duration(seconds: 2),
-                                                ),
-                                              );
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content:
-                                                      Text('utilisateur non '
-                                                          'trouvé !'),
-                                                  duration:
-                                                      Duration(seconds: 2),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                        ),
-                                      ],
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
                                 );
@@ -301,13 +299,26 @@ class _UserCollectorState extends State<UserCollector> {
   }
 
   Future<void> deleteAllDocumentsInCollection(String uid) async {
+    CollectionReference<Map<String, dynamic>> collection = FirebaseFirestore
+        .instance
+        .collection('users')
+        .doc(uid)
+        .collection('Documents');
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await collection.get();
+    querySnapshot.docs.forEach((doc) {
+      doc.reference.delete();
+    });
     await FirebaseFirestore.instance.collection('users').doc(uid).delete();
   }
 
   Future<void> updateRole(String uid, String role) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .update({'Role': role});
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .update({'Role': role});
+    } catch (e) {
+      print(e);
+    }
   }
 }
