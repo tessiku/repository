@@ -66,10 +66,10 @@ class _d3State extends State<d3> {
 
 List<ChartData> chartData = <ChartData>[
   ChartData('premier ', 815, 1392, 2014),
-  ChartData('second ', 1422, 2228, 3258),
-  ChartData('third ', 2008, 3014, 4382),
-  ChartData('forth ', 2871, 4176, 5921),
-  ChartData('fifthe ', 5890, 8548, 11767),
+  ChartData('deuxième', 1422, 2228, 3258),
+  ChartData('troisième ', 2008, 3014, 4382),
+  ChartData('quatrieme', 2871, 4176, 5921),
+  ChartData('cenquieme', 5890, 8548, 11767),
 ];
 
 class ChartData {

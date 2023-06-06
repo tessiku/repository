@@ -34,7 +34,7 @@ class _d6_list_chState extends State<d6_list_ch> {
         toolbarHeight: 80,
         centerTitle: true,
         title: Container(
-          width: 100,
+          width: 150,
           child: Transform.scale(
             scale: 1,
             child: Text(

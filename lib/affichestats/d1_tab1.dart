@@ -39,7 +39,7 @@ class _d1_tab1State extends State<d1_tab1> {
         toolbarHeight: 80,
         centerTitle: true,
         title: Container(
-            width: 200,
+            width: 60,
             child: Transform.scale(
                 scale: 1,
                 child: Text(

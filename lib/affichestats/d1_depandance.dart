@@ -51,9 +51,10 @@ class _StatsListState extends State<StatsList> {
       _filteredStatsList = filteredList;
     });
   }
-                                                                      //route to the stats pages with the year
+
+  //route to the stats pages with the year
   void _navigateToStatsPage(BuildContext context, String statsItem) {
-    if (statsItem == 'stats pour  2010 moyennes pour la famille ') {
+    if (statsItem == 'stats pour 2010 moyennes pour la famille ') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => d1_tab1(statsItem: 2010)),

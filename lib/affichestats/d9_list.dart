@@ -9,14 +9,13 @@ class d9_list extends StatefulWidget {
 class _StatsPageState extends State<d9_list> {
   TextEditingController _searchController = TextEditingController();
   List<String> _statsList = [
-    'Grand Tunisie',
+    'Grand tunis',
     'Nord-Est',
     'Nord-ouest',
     'Centre-Est',
     'Centre-ouest',
     'Sud-Est',
     'Sud-Ouest',
-    'Niveau national',
   ];
   List<String> _filteredStatsList = [];
 
@@ -53,7 +52,7 @@ class _StatsPageState extends State<d9_list> {
   }
 
   void _navigateToStatsPage(BuildContext context, String statsItem) {
-    if (statsItem == 'Grande Tunisie') {
+    if (statsItem == 'Grand tunis') {
       Navigator.push(
         context,
         MaterialPageRoute(

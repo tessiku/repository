@@ -139,40 +139,33 @@ class _EnquetteState extends State<Enquette> {
                     color: Color.fromARGB(255, 255, 48, 48),
                     borderRadius: BorderRadius.circular(4.0),
                   ),
-                  child: Container(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width),
-                    child: Expanded(
-                      child: Column(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons
-                                    .info_outline, // Replace with the desired icon
+                          Icon(
+                            Icons.info_outline, // Replace with the desired icon
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                              width:
+                                  8), // Adjust the spacing between the icon and text
+                          Flexible(
+                            child: Text(
+                              'Veuillez saisir vos dépenses de trimestre précédent',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
-                              SizedBox(
-                                  width:
-                                      8), // Adjust the spacing between the icon and text
-                              Flexible(
-                                child: Text(
-                                  'Veuillez saisir vos dépenses de trimestre précédent',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16.0),

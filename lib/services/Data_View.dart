@@ -41,15 +41,14 @@ class Data_View extends StatelessWidget {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            height: 20.0,
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Container(
-              height: 210,
-              child: StreamBuilder<QuerySnapshot>(
+          SizedBox(height: 20.0),
+          Expanded(
+            child: SingleChildScrollView(
+                child: Column(children: [
+              SizedBox(height: 20.0),
+              StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Citoyen')
                     .doc(cin)
@@ -140,7 +139,7 @@ class Data_View extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ])),
           ),
         ],
       ),
@@ -151,7 +150,7 @@ class Data_View extends StatelessWidget {
     switch (documentId) {
       case 'Depense':
         return Icons.attach_money;
-      case 'General info':
+      case 'inforamation Générale':
         return Icons.info;
       // Add more cases for other icons as needed
       default:
