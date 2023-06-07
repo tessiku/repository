@@ -107,13 +107,13 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.home),
-                title: Text('page d\'accueil'),
+                title: Text('Page d\'accueil'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => HomePageLoginA(
-                              title: 'page d\'accueil',
+                              title: 'Page d\'accueil',
                               userEmail: widget.userEmail,
                               name: widget.name,
                             )),
@@ -122,7 +122,7 @@ class _HomePageLoginState extends State<HomePageLoginA> {
               ),
               ListTile(
                 leading: Icon(Icons.query_stats_outlined),
-                title: Text('statistiques'),
+                title: Text('Statistiques'),
                 onTap: () {
                   Navigator.push(
                     context,

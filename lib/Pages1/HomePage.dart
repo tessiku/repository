@@ -113,13 +113,13 @@ class _HomePageState extends State<HomePage> {
                                       Object exception,
                                       StackTrace? stackTrace) {
                                     return Image.asset(
-                                      'assets/default1.png',
+                                      'assets/default1.jpg',
                                       fit: BoxFit.cover,
                                     );
                                   },
                                 )
                               : Image.asset(
-                                  "assets/default1.png",
+                                  "assets/default1.jpg",
                                   fit: BoxFit.cover,
                                 ),
                         ),

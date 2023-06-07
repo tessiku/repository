@@ -148,7 +148,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.calendar_view_day),
-                title: Text('événement'),
+                title: Text('Evénement'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -158,7 +158,7 @@ class _HomePageLoginState extends State<HomePageLogin> {
               ),
               ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('Se déconnecter'),
+                title: Text('Déconnexion'),
                 onTap: () async {
                   Navigator.pushAndRemoveUntil(
                     context,

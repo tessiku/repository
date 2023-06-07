@@ -947,11 +947,11 @@ class _EnquetteState extends State<Enquette> {
                             .set(expensesData)
                             .then((value) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Expenses saved successfully!')));
+                              content: Text('les donnés sont enregistrés!')));
                           Navigator.pop(context);
                         }).catchError((error) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Failed to save expenses.')));
+                              content: Text('les donnés ne sont pas enregistrés!')));
                         });
                       }
                     },

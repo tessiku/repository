@@ -157,7 +157,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => HomePageLoginC(
-                              title: 'Home Page',
+                              title: 'page d\'accueil',
                               userEmail: widget.userEmail,
                               name: widget.name,
                             )),
@@ -166,7 +166,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
               ),
               ListTile(
                 leading: Icon(Icons.query_stats_outlined),
-                title: Text('Stats'),
+                title: Text('Statistiques'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -176,7 +176,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
               ),
               ListTile(
                 leading: Icon(Icons.handshake),
-                title: Text('To do list'),
+                title: Text('Enquette'),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -189,7 +189,7 @@ class _HomePageLoginCState extends State<HomePageLoginC> {
               ),
               ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('Log out'),
+                title: Text('Déconnexion'),
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
                     context,

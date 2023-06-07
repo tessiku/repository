@@ -8,11 +8,14 @@ class ArticlePage extends StatelessWidget {
   const ArticlePage({Key? key, required this.article}) : super(key: key);
 
   Future<void> launchArticleUrl(BuildContext context) async {
-    final url = article.ArticleUrl;                    // article.ArticleUrl;
-    final uri = Uri.parse(url);                            // encodeFull(url) bech najem nessta3em el url lancher ba3ed ma n7otouh fi uri
+    final url = article.ArticleUrl; // article.ArticleUrl;
+    final uri = Uri.parse(
+        url); // encodeFull(url) bech najem nessta3em el url lancher ba3ed ma n7otouh fi uri
 
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication); // bech n7el el url yaffichi fi chrome wa  ay browser mte3i 
+      await launchUrl(uri,
+          mode: LaunchMode
+              .externalApplication); // bech n7el el url yaffichi fi chrome wa  ay browser mte3i
     } else {
       throw 'Could not launch $url';
     }
@@ -49,7 +52,7 @@ class ArticlePage extends StatelessWidget {
                 errorBuilder: (BuildContext context, Object exception,
                     StackTrace? stackTrace) {
                   return Image.asset(
-                    'assets/images/default.png',
+                    "assets/default1.jpg",
                     fit: BoxFit.cover,
                   );
                 },
